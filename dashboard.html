@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IGCSE CS & Innovation Hackathon Lab</title>
+    <title>Eduable | IGCSE CS & Innovation Hackathon Lab</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -35,10 +35,20 @@
             line-height: 1.6;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.08), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.08), transparent 25%);
+                radial-gradient(circle at 0% 0%, rgba(139, 92, 246, 0.15), transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(6, 182, 212, 0.15), transparent 40%);
             background-attachment: fixed;
         }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { 
+            background: rgba(255, 255, 255, 0.1); 
+            border-radius: 10px;
+            border: 2px solid var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
         h1, h2, h3, h4 {
             font-family: 'Outfit', sans-serif;
@@ -128,7 +138,43 @@
 
         header {
             margin-bottom: 4rem;
-            animation: fadeInDown 0.8s ease-out;
+            animation: fadeInDown 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            position: relative;
+        }
+
+        .hero-banner {
+            width: 100%;
+            height: 350px;
+            border-radius: 24px;
+            margin-bottom: 3rem;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        .hero-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6) contrast(1.1);
+            transition: transform 10s linear;
+        }
+
+        .hero-banner:hover img {
+            transform: scale(1.1);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 3rem;
+            background: linear-gradient(to top, rgba(9, 9, 11, 0.9), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
         }
 
         .subtitle {
@@ -198,55 +244,54 @@
         /* Grid Layouts */
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
 
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
 
         .grid-4 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1.5rem;
         }
 
         /* Glass Cards */
         .glass-card {
             background: var(--bg-card);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 2rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
         }
 
-        .glass-card::before {
+        .glass-card::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.03), transparent);
-            transform: translateX(-100%);
-            transition: 0.6s transform;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
         .glass-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.02);
             background: var(--bg-card-hover);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
-        .glass-card:hover::before {
-            transform: translateX(100%);
+        .glass-card:hover::after {
+            opacity: 1;
         }
 
         .card-icon {
@@ -342,10 +387,16 @@
         }
 
         .week-card {
-            background: rgba(24, 24, 27, 0.5);
+            background: rgba(24, 24, 27, 0.4);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .week-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
         }
 
         .week-header {
@@ -477,9 +528,11 @@
             * {
                 overflow: visible !important;
                 float: none !important;
-                page-break-inside: auto !important;
-                page-break-before: auto !important;
-                page-break-after: auto !important;
+                page-break-inside: auto;
+                page-break-before: auto;
+                page-break-after: auto;
+                animation: none !important;
+                transition: none !important;
             }
             body, html {
                 background: white !important;
@@ -512,17 +565,16 @@
                 margin-bottom: 20px;
                 display: block !important;
             }
-            .gradient-text, h1, h2, h3, h4, .text-muted, td, th, .label, p, span, div {
+            .gradient-text, h1, h2, h3, h4, .text-muted, td, th, .label, p, span, div, strong, li {
                 color: black !important;
-            }
-            h1, h2, h3, h4 {
-                page-break-after: avoid !important;
-                page-break-inside: avoid !important;
             }
             .week-content {
                 max-height: none !important;
                 padding: 1rem !important;
                 display: block !important;
+            }
+            .section-header, .week-header, .split-box, .grid-2, .grid-3, .grid-4, .week-grid {
+                display: block !important; /* Force block over flex */
             }
             section {
                 margin-bottom: 2rem !important;
@@ -561,26 +613,81 @@
         }
 
         @media (max-width: 768px) {
-            .sidebar { transform: translateX(-100%); transition: 0.3s; }
+            .sidebar { 
+                transform: translateX(-100%); 
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                width: 260px;
+                box-shadow: 20px 0 50px rgba(0,0,0,0.5);
+            }
             .sidebar.open { transform: translateX(0); }
-            .main-content { margin-left: 0; padding: 2rem; }
-            h1 { font-size: 2.5rem; }
-            .header-meta { flex-direction: column; gap: 1rem; }
-            .mobile-menu-btn { display: block; }
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                backdrop-filter: blur(4px);
+                z-index: 90;
+            }
+            .sidebar-overlay.open { display: block; }
+            .hero-banner { height: 220px; border-radius: 16px; margin-bottom: 2rem; }
+            .hero-overlay { padding: 1.5rem; }
+            .hero-overlay h1 { font-size: 2.2rem !important; }
+            .hero-overlay .subtitle { font-size: 0.7rem; }
+            
+            .main-content { margin-left: 0; padding: 1.25rem; }
+            header { margin-bottom: 2rem; }
+            h1 { font-size: 1.8rem; word-break: break-word; }
+            .header-meta { font-size: 0.85rem; gap: 0.5rem; display: grid; grid-template-columns: 1fr; }
+            .meta-item { width: 100%; border-radius: 12px; }
+            
+            .section-header h2 { font-size: 1.4rem; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 1rem; }
+            .glass-card { padding: 1.5rem; }
+            
+            .week-header { padding: 1rem; flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+            .week-title { gap: 0.8rem; }
+            .week-badge { padding: 0.3rem 0.8rem; font-size: 0.8rem; }
+            .week-name { font-size: 1rem; line-height: 1.3; }
+            .week-toggle { align-self: flex-end; width: 28px; height: 28px; }
+            
+            .week-card.active .week-content { padding: 1.25rem 0.75rem; }
+            .split-box { padding: 1rem; }
+            .mini-code { font-size: 0.8rem; padding: 0.75rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; }
+            .hero-banner { height: 180px; }
+            .hero-overlay h1 { font-size: 1.8rem !important; }
         }
 
         .mobile-menu-btn {
             display: none;
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 1.5rem;
+            right: 1.5rem;
             z-index: 1000;
-            background: var(--primary);
-            border: none;
+            background: rgba(139, 92, 246, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
-            padding: 10px 15px;
-            border-radius: 8px;
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
             cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .mobile-menu-btn i {
+            font-size: 1.2rem;
         }
 
         /* Animations */
@@ -598,11 +705,12 @@
 <body>
 
     <button class="mobile-menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+    <div class="sidebar-overlay" onclick="toggleMenu()"></div>
 
     <nav class="sidebar">
         <div class="logo">
-            <i class="fas fa-microchip"></i>
-            <span>HackLab</span>
+            <i class="fas fa-brain" style="color: var(--secondary);"></i>
+            <span>Eduable</span>
         </div>
         <ul class="nav-links">
             <li><a href="#overview" class="active"><i class="fas fa-chart-pie"></i> Program Overview</a></li>
@@ -622,12 +730,24 @@
 
     <main class="main-content">
         <header>
-            <span class="subtitle">12-Week Curriculum</span>
-            <h1>IGCSE Computer Science &<br><span class="gradient-text">Innovation Hackathon Lab</span></h1>
-            <div class="header-meta">
-                <span><i class="far fa-clock"></i> 1 Session/Week (90 mins)</span>
-                <span><i class="fas fa-user-friends"></i> 4 Students per Class</span>
-                <span><i class="fas fa-user-graduate"></i> IGCSE Level (Ages 14-16)</span>
+            <div class="hero-banner">
+                <img src="C:\Users\Admin\.gemini\antigravity\brain\e2e77635-7b97-437f-b946-79ab07af164f\hackathon_hero_abstract_1773385284283.png" alt="Hackathon Abstract Concept">
+                <div class="hero-overlay">
+                    <span class="subtitle" style="margin-bottom: 0.5rem; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Eduable Computer Programming School</span>
+                    <h1 style="font-size: 3.2rem; margin-bottom: 0; text-shadow: 0 5px 20px rgba(0,0,0,0.8);">NextGen <span class="gradient-text">Coders</span></h1>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem;">
+                <div style="flex: 1; min-width: 300px;">
+                    <span class="subtitle">Official 12-Week Curriculum</span>
+                    <h1 style="font-size: 2.8rem; line-height: 1.1; margin-bottom: 0;">IGCSE Computer Science &<br><span class="gradient-text">Innovation Hackathon</span></h1>
+                </div>
+                <div class="header-meta">
+                    <span class="meta-item"><i class="far fa-clock"></i> 90m Weekly</span>
+                    <span class="meta-item"><i class="fas fa-user-friends"></i> 4 Students</span>
+                    <span class="meta-item"><i class="fas fa-user-graduate"></i> IGCSE Level</span>
+                </div>
             </div>
         </header>
 
@@ -1117,7 +1237,24 @@
         // Mobile menu toggle
         function toggleMenu() {
             document.querySelector('.sidebar').classList.toggle('open');
+            document.querySelector('.sidebar-overlay').classList.toggle('open');
+            
+            // Adjust body scroll
+            if(document.querySelector('.sidebar').classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         }
+
+        // Close sidebar on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if(window.innerWidth <= 768) {
+                    toggleMenu();
+                }
+            });
+        });
     </script>
 </body>
 </html>
