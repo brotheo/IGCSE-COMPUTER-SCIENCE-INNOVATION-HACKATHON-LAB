@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGCSE CS & Innovation Hackathon Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #09090b;
+            --bg-card: rgba(24, 24, 27, 0.7);
+            --bg-card-hover: rgba(39, 39, 42, 0.9);
+            --primary: #8b5cf6;
+            --primary-glow: rgba(139, 92, 246, 0.4);
+            --secondary: #06b6d4;
+            --secondary-glow: rgba(6, 182, 212, 0.4);
+            --accent: #f43f5e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.08), transparent 25%);
+            background-attachment: fixed;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            color: #ffffff;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        /* Layout */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background: rgba(9, 9, 11, 0.9);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            height: 100vh;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--primary);
+            font-size: 1.8rem;
+            text-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--text-muted);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links li a:hover, .nav-links li a.active {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-links li a.active {
+            border-left: 3px solid var(--primary);
+            background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 3rem 4rem;
+            max-width: 1400px;
+        }
+
+        header {
+            margin-bottom: 4rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .subtitle {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 2rem;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .header-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 100px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+        }
+
+        .section-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s transform;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            background: var(--bg-card-hover);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .glass-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            display: inline-block;
+            padding: 1rem;
+            background: rgba(6, 182, 212, 0.1);
+            border-radius: 12px;
+        }
+
+        /* Specific Components */
+        .stat-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #fff, #94a3b8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .label {
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        /* Tables to Cards */
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.02);
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        td {
+            color: #fff;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Timeline/Roadmap */
+        .phase-card {
+            border-left: 4px solid var(--primary);
+        }
+
+        .phase-number {
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Weekly Curriculum Accordion */
+        .week-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .week-card {
+            background: rgba(24, 24, 27, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .week-header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .week-header:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .week-title {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .week-badge {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: white;
+            box-shadow: 0 2px 10px rgba(139, 92, 246, 0.3);
+        }
+
+        .week-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .week-toggle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+
+        .week-card.active .week-toggle {
+            transform: rotate(180deg);
+            background: var(--primary);
+            color: white;
+        }
+
+        .week-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease-out;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .week-card.active .week-content {
+            padding: 2rem;
+            max-height: 2000px; /* Arbitrary large number */
+            border-top: 1px solid var(--border);
+        }
+
+        .week-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .split-box {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        h4 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        ul {
+            list-style-position: inside;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .mini-code {
+            background: #0f172a;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            color: #38bdf8;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin: 1rem 0;
+            white-space: pre-wrap;
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .tag.blue { background: rgba(56, 189, 248, 0.1); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.2); }
+        .tag.purple { background: rgba(168, 85, 247, 0.1); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.2); }
+        .tag.pink { background: rgba(236, 72, 153, 0.1); color: #ec4899; border: 1px solid rgba(236, 72, 153, 0.2); }
+        .tag.green { background: rgba(34, 197, 94, 0.1); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.2); }
+
+        /* Print styles */
+        @media print {
+            * {
+                overflow: visible !important;
+                float: none !important;
+                page-break-inside: auto !important;
+                page-break-before: auto !important;
+                page-break-after: auto !important;
+            }
+            body, html {
+                background: white !important;
+                color: black !important;
+                height: auto !important;
+                max-width: 100% !important;
+            }
+            .container {
+                display: block !important;
+            }
+            .sidebar {
+                display: none !important;
+            }
+            .main-content {
+                margin: 0 !important;
+                padding: 0 !important;
+                max-width: none !important;
+                display: block !important;
+            }
+            .glass-card, .split-box, .week-card {
+                background: white !important;
+                border: 1px solid #ccc !important;
+                color: black !important;
+                box-shadow: none !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                transform: none !important;
+                transition: none !important;
+                page-break-inside: auto; /* Changed to auto to prevent large blocks vanishing */
+                margin-bottom: 20px;
+                display: block !important;
+            }
+            .gradient-text, h1, h2, h3, h4, .text-muted, td, th, .label, p, span, div {
+                color: black !important;
+            }
+            h1, h2, h3, h4 {
+                page-break-after: avoid !important;
+                page-break-inside: avoid !important;
+            }
+            .week-content {
+                max-height: none !important;
+                padding: 1rem !important;
+                display: block !important;
+            }
+            section {
+                margin-bottom: 2rem !important;
+                display: block !important;
+            }
+            .grid-2, .grid-3, .grid-4, .week-grid, .week-container {
+                display: block !important; /* Disable grid/flex for print */
+                height: auto !important;
+            }
+            .glass-card {
+                width: 100%;
+                margin-bottom: 1.5rem;
+            }
+            .split-box {
+                margin-bottom: 1rem;
+            }
+            /* Hide the mobile menu button and export button on print */
+            .mobile-menu-btn, button {
+                display: none !important;
+            }
+            .week-toggle {
+                display: none !important; /* hide arrows in print */
+            }
+            table, thead, tbody, tr, th, td {
+                page-break-inside: auto;
+            }
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .week-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); transition: 0.3s; }
+            .sidebar.open { transform: translateX(0); }
+            .main-content { margin-left: 0; padding: 2rem; }
+            h1 { font-size: 2.5rem; }
+            .header-meta { flex-direction: column; gap: 1rem; }
+            .mobile-menu-btn { display: block; }
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeInDown 0.6s ease-out forwards;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="mobile-menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fas fa-microchip"></i>
+            <span>HackLab</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#overview" class="active"><i class="fas fa-chart-pie"></i> Program Overview</a></li>
+            <li><a href="#roles"><i class="fas fa-users-cog"></i> Team Roles</a></li>
+            <li><a href="#phases"><i class="fas fa-road"></i> Phase Roadmap</a></li>
+            <li><a href="#curriculum"><i class="fas fa-book-open"></i> Weekly Curriculum</a></li>
+            <li><a href="#portfolio"><i class="fas fa-project-diagram"></i> Project Portfolio</a></li>
+            <li><a href="#outcomes"><i class="fas fa-award"></i> Checkpoints & Outcomes</a></li>
+            <li><a href="#resources"><i class="fas fa-tools"></i> Resources & Notes</a></li>
+        </ul>
+        <div style="margin-top: auto;">
+            <button onclick="window.print()" style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: rgba(255,255,255,0.1); color: white; cursor: pointer; transition: 0.3s; font-weight: bold; border: 1px solid rgba(255,255,255,0.2);">
+                <i class="fas fa-file-pdf"></i> Export PDF
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header>
+            <span class="subtitle">12-Week Curriculum</span>
+            <h1>IGCSE Computer Science &<br><span class="gradient-text">Innovation Hackathon Lab</span></h1>
+            <div class="header-meta">
+                <span><i class="far fa-clock"></i> 1 Session/Week (90 mins)</span>
+                <span><i class="fas fa-user-friends"></i> 4 Students per Class</span>
+                <span><i class="fas fa-user-graduate"></i> IGCSE Level (Ages 14-16)</span>
+            </div>
+        </header>
+
+        <!-- Overview Section -->
+        <section id="overview" class="fade-in" style="animation-delay: 0.1s;">
+            <div class="section-header">
+                <div class="section-icon"><i class="fas fa-info" style="color:white;"></i></div>
+                <h2>Program Structure</h2>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card stat-card">
+                    <div class="card-icon"><i class="fas fa-hourglass-half"></i></div>
+                    <div class="value">12</div>
+                    <div class="label">Weeks Duration (3 Phases)</div>
+                    <p style="color: var(--text-muted); margin-top: 1rem;">Comprehensive journey from computational thinking to full prototype development.</p>
+                </div>
+                
+                <div class="glass-card">
+                    <h3 style="margin-bottom: 1.5rem; display:flex; align-items:center; gap:10px;"><i class="fas fa-clock" style="color:var(--secondary)"></i> Session Split (90 mins Total)</h3>
+                    <div style="display:flex; flex-direction:column; gap:15px;">
+                        <div style="background: rgba(139, 92, 246, 0.1); border: 1px solid var(--primary); padding: 1rem; border-radius: 8px; display:flex; justify-content:space-between; align-items:center;">
+                            <div>
+                                <span style="font-weight:bold; color:white; display:block;">IGCSE Lesson</span>
+                                <span style="font-size:0.85rem; color:var(--text-muted);">Theory & Concepts</span>
+                            </div>
+                            <span style="font-size:1.5rem; font-weight:800; color:var(--primary);">45m</span>
+                        </div>
+                        <div style="background: rgba(6, 182, 212, 0.1); border: 1px solid var(--secondary); padding: 1rem; border-radius: 8px; display:flex; justify-content:space-between; align-items:center;">
+                            <div>
+                                <span style="font-weight:bold; color:white; display:block;">Hackathon Lab</span>
+                                <span style="font-size:0.85rem; color:var(--text-muted);">Hands-on Coding</span>
+                            </div>
+                            <span style="font-size:1.5rem; font-weight:800; color:var(--secondary);">45m</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roles Section -->
+        <section id="roles" class="fade-in" style="animation-delay: 0.2s;">
+            <div class="section-header">
+                <div class="section-icon"><i class="fas fa-users" style="color:white;"></i></div>
+                <h2>Team Roles <span style="font-size: 1rem; color: var(--text-muted); font-weight: normal; margin-left: 10px;">(Rotate Every 3-4 Weeks)</span></h2>
+            </div>
+            <div class="grid-4">
+                <div class="glass-card" style="border-top: 3px solid #8b5cf6;">
+                    <div class="card-icon" style="color:#8b5cf6; background:rgba(139,92,246,0.1);"><i class="fas fa-crown"></i></div>
+                    <h3>Team Lead</h3>
+                    <p style="color:var(--text-muted); margin-top:1rem; font-size:0.9rem;">Organizes tasks, keeps team on track generally, and coordinates the entire workflow.</p>
+                </div>
+                <div class="glass-card" style="border-top: 3px solid #06b6d4;">
+                    <div class="card-icon" style="color:#06b6d4; background:rgba(6,182,212,0.1);"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Programmer</h3>
+                    <p style="color:var(--text-muted); margin-top:1rem; font-size:0.9rem;">Writes code, implements core features, and develops programming logic.</p>
+                </div>
+                <div class="glass-card" style="border-top: 3px solid #ec4899;">
+                    <div class="card-icon" style="color:#ec4899; background:rgba(236,72,153,0.1);"><i class="fas fa-bug"></i></div>
+                    <h3>Tester/Debugger</h3>
+                    <p style="color:var(--text-muted); margin-top:1rem; font-size:0.9rem;">Tests overall functionality, finds software bugs, and verifies accurate outputs.</p>
+                </div>
+                <div class="glass-card" style="border-top: 3px solid #10b981;">
+                    <div class="card-icon" style="color:#10b981; background:rgba(16,185,129,0.1);"><i class="fas fa-paint-brush"></i></div>
+                    <h3>Designer</h3>
+                    <p style="color:var(--text-muted); margin-top:1rem; font-size:0.9rem;">Creates UI/UX, prepares presentations, and effectively documents team work.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase Roadmap -->
+        <section id="phases" class="fade-in" style="animation-delay: 0.3s;">
+            <div class="section-header">
+                <div class="section-icon"><i class="fas fa-map-signs" style="color:white;"></i></div>
+                <h2>Program Roadmap</h2>
+            </div>
+            <div class="grid-3">
+                <div class="glass-card phase-card" style="border-left-color: var(--primary);">
+                    <div class="phase-number">Weeks 1-4</div>
+                    <h3 style="margin-bottom: 1rem;">Phase 1: Foundations</h3>
+                    <p style="color:var(--text-muted);"><b style="color:#fff;">Focus:</b> Computational Thinking</p>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                        <p style="font-size: 0.9rem; color: #cbd5e1;"><i class="fas fa-bullseye" style="color:var(--primary); margin-right:5px;"></i> Core programming logic and algorithm understanding.</p>
+                    </div>
+                </div>
+                <div class="glass-card phase-card" style="border-left-color: var(--secondary);">
+                    <div class="phase-number">Weeks 5-8</div>
+                    <h3 style="margin-bottom: 1rem;">Phase 2: Development</h3>
+                    <p style="color:var(--text-muted);"><b style="color:#fff;">Focus:</b> Programming Skills</p>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                        <p style="font-size: 0.9rem; color: #cbd5e1;"><i class="fas fa-bullseye" style="color:var(--secondary); margin-right:5px;"></i> Functional software tools and effective debugging.</p>
+                    </div>
+                </div>
+                <div class="glass-card phase-card" style="border-left-color: var(--accent);">
+                    <div class="phase-number">Weeks 9-12</div>
+                    <h3 style="margin-bottom: 1rem;">Phase 3: Hackathon</h3>
+                    <p style="color:var(--text-muted);"><b style="color:#fff;">Focus:</b> Innovation Project</p>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                        <p style="font-size: 0.9rem; color: #cbd5e1;"><i class="fas fa-bullseye" style="color:var(--accent); margin-right:5px;"></i> Complete prototype from initial idea to final presentation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Curriculum -->
+        <section id="curriculum">
+            <div class="section-header">
+                <div class="section-icon"><i class="fas fa-list-alt" style="color:white;"></i></div>
+                <h2>Detailed Weekly Curriculum</h2>
+            </div>
+            
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; margin-top: 2rem;">PHASE 1 (Weeks 1-4)</h3>
+            <div class="week-container" id="phase1-container">
+                <!-- JS will populate -->
+            </div>
+
+            <h3 style="color: var(--secondary); margin-bottom: 1.5rem; margin-top: 3rem;">PHASE 2 (Weeks 5-8)</h3>
+            <div class="week-container" id="phase2-container">
+                <!-- JS will populate -->
+            </div>
+
+            <h3 style="color: var(--accent); margin-bottom: 1.5rem; margin-top: 3rem;">PHASE 3 (Weeks 9-12)</h3>
+            <div class="week-container" id="phase3-container">
+                <!-- JS will populate -->
+            </div>
+        </section>
+
+        <!-- Portfolio & Checkpoints -->
+        <section id="portfolio">
+            <div class="section-header">
+                <div class="section-icon"><i class="fas fa-briefcase" style="color:white;"></i></div>
+                <h2>Project Portfolio & Checkpoints</h2>
+            </div>
+            <div class="grid-2">
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Week</th>
+                                <th>Project Name</th>
+                                <th>Key Skills</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>First Webpage</td><td><span class="tag pink">HTML Basics</span></td></tr>
+                            <tr><td>2</td><td>Personal Profile</td><td><span class="tag blue">Variables & Data</span></td></tr>
+                            <tr><td>3</td><td>Pass/Fail Calculator</td><td><span class="tag green">Conditional Logic</span></td></tr>
+                            <tr><td>4</td><td>Multiplication Table</td><td><span class="tag purple">Loops</span></td></tr>
+                            <tr><td>5-6</td><td>Quiz Application</td><td><span class="tag pink">Decomposition</span></td></tr>
+                            <tr><td>7</td><td>Calculator</td><td><span class="tag blue">Algorithms</span></td></tr>
+                            <tr><td>9-12</td><td>Hackathon Project</td><td><span class="tag purple">Full-stack</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="glass-card" style="background: linear-gradient(145deg, rgba(24,24,27,0.8) 0%, rgba(15,23,42,0.8) 100%);">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--accent);"><i class="fas fa-flag-checkered"></i> Assessment Checkpoints</h3>
+                    
+                    <div style="display:flex; flex-direction:column; gap:1.5rem;">
+                        <div style="border-left: 3px solid var(--primary); padding-left: 1rem;">
+                            <h4 style="color:white; margin:0;">Phase 1 Review (Week 4)</h4>
+                            <p style="color:var(--text-muted); font-size:0.9rem; margin-top:5px;">Algorithm quiz and webpage demonstration.</p>
+                        </div>
+                        <div style="border-left: 3px solid var(--secondary); padding-left: 1rem;">
+                            <h4 style="color:white; margin:0;">Phase 2 Review (Week 8)</h4>
+                            <p style="color:var(--text-muted); font-size:0.9rem; margin-top:5px;">Debugging challenge and calculator demo.</p>
+                        </div>
+                        <div style="border-left: 3px solid var(--accent); padding-left: 1rem;">
+                            <h4 style="color:white; margin:0;">Final Assessment (Week 12)</h4>
+                            <p style="color:var(--text-muted); font-size:0.9rem; margin-top:5px;">Hackathon presentation and code review.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Sections -->
+        <section id="resources">
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3 style="margin-bottom: 1.5rem; display:flex; align-items:center; gap:10px;"><i class="fas fa-box-open" style="color:var(--primary)"></i> Program Deliverables</h3>
+                    
+                    <h4 style="font-size: 1rem; color: white;">For Students</h4>
+                    <ul style="font-size: 0.9rem;">
+                        <li>Understanding of IGCSE CS curriculum</li>
+                        <li>Portfolio of 6 completed coding projects</li>
+                        <li>Collaborative team working experience</li>
+                        <li>Presentation & communication skills</li>
+                    </ul>
+                    
+                    <h4 style="font-size: 1rem; color: white; margin-top:1rem;">For Parents</h4>
+                    <ul style="font-size: 0.9rem;">
+                        <li>Weekly progress updates</li>
+                        <li>Access to student project portfolio</li>
+                        <li>Final presentation event invitation</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card">
+                    <h3 style="margin-bottom: 1.5rem; display:flex; align-items:center; gap:10px;"><i class="fas fa-clipboard-list" style="color:var(--secondary)"></i> Resources & Guidelines</h3>
+                    
+                    <div style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <strong style="color: var(--secondary);">Technical Requirements</strong>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">Computers with internet (1 per student), VS Code Editor, Modern web browser, Projector.</p>
+                    </div>
+
+                    <h4 style="font-size: 0.9rem; color: white; text-transform: uppercase;">Instructor Tips</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Encourage peer learning. Allow error-based learning during debugging. Celebrate small wins. Balance theory with practice.</p>
+                    
+                    <h4 style="font-size: 0.9rem; color: white; margin-top:1rem; text-transform: uppercase;">Differentiation</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Provide extension activities for advanced students, and support for struggling learners. Use peer mentoring.</p>
+                </div>
+            </div>
+        </section>
+        
+        <footer style="text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem;">
+            Document prepared for IGCSE Computer Science and Innovation Hackathon Lab Program<br>
+            12-Week Curriculum | 90-Minute Weekly Sessions | 4-Student Teams
+        </footer>
+    </main>
+
+    <script>
+        const curriculumData = [
+            // Phase 1
+            {
+                week: 1, phase: 1,
+                title: "Intro to CS and Algorithms",
+                lesson: {
+                    topics: ["What is Computer Science?", "Computational Thinking", "Algorithms", "Flowchart symbols"],
+                    code: "1. Start\n2. Enter password\n3. Check password\n4. IF correct - Grant access\n   ELSE - Show error\n5. End"
+                },
+                lab: {
+                    project: "First Webpage",
+                    skills: ["HTML basic structure", "Browser preview", "Code editing"],
+                    elements: "Title, Short paragraph, Simple formatting"
+                },
+                outcome: "Students understand what programming is, how algorithms describe solutions, and how code becomes a webpage."
+            },
+            {
+                week: 2, phase: 1,
+                title: "Variables and Data",
+                lesson: {
+                    topics: ["Variables", "Data Types (Integer, String, Boolean)", "Trace tables"],
+                    code: "INPUT name\nINPUT age\nDISPLAY name\nDISPLAY age"
+                },
+                lab: {
+                    project: "Personal Profile Webpage",
+                    skills: ["JavaScript variables", "Displaying variable content"],
+                    elements: "Name, Favorite subject, Hobby, Dream career"
+                },
+                outcome: "Students understand how programs store information and use variables in real code."
+            },
+            {
+                week: 3, phase: 1,
+                title: "Conditions (Decision Making)",
+                lesson: {
+                    topics: ["IF/ELSE Statements", "Writing pseudocode with conditions"],
+                    code: "IF score >= 50 THEN\n    DISPLAY \"PASS\"\nELSE\n    DISPLAY \"FAIL\"\nENDIF"
+                },
+                lab: {
+                    project: "Pass/Fail Calculator",
+                    skills: ["Input fields", "Button actions", "Conditional logic"],
+                    elements: "User enters score -> Program displays Pass or Fail"
+                },
+                outcome: "Students understand decision-making in programs and practical use of IF statements."
+            },
+            {
+                week: 4, phase: 1,
+                title: "Loops",
+                lesson: {
+                    topics: ["Repetition", "FOR loop (counted)", "WHILE loop (conditional)"],
+                    code: "FOR i = 1 TO 10\n    DISPLAY i\nNEXT i"
+                },
+                lab: {
+                    project: "Multiplication Table Generator",
+                    skills: ["JavaScript loop implementation"],
+                    elements: "User enters number -> Generates table (e.g. 5x1=5)"
+                },
+                outcome: "Students understand repetition and loop logic."
+            },
+            // Phase 2
+            {
+                week: 5, phase: 2,
+                title: "Problem Decomposition",
+                lesson: {
+                    topics: ["Problem Decomposition", "Design modular systems"],
+                    code: "Quiz Components:\n1. Question display\n2. Answer options\n3. Score tracking\n4. Result display"
+                },
+                lab: {
+                    project: "Quiz Application (Start)",
+                    skills: ["HTML structuring", "Basic JS Logic"],
+                    elements: "Question display, Multiple choice options, Score variable"
+                },
+                outcome: "Students can break down complex problems and begin building a quiz application."
+            },
+            {
+                week: 6, phase: 2,
+                title: "Data Representation",
+                lesson: {
+                    topics: ["Binary numbers", "ASCII encoding", "Data storage"],
+                    code: "Decimal 5 = Binary 101\nDecimal 8 = Binary 1000"
+                },
+                lab: {
+                    project: "Quiz Application (Enhancement)",
+                    skills: ["Advanced logic mapping"],
+                    elements: "Multiple questions, Score counter, Result message display"
+                },
+                outcome: "Students understand data representation and enhance their quiz with multiple questions."
+            },
+            {
+                week: 7, phase: 2,
+                title: "Algorithm Design",
+                lesson: {
+                    topics: ["Designing algorithms before coding", "Writing clear pseudocode"],
+                    code: "IF op = \"add\" THEN\n  res = n1 + n2\nELSE IF op = \"subtract\" THEN\n  res = n1 - n2"
+                },
+                lab: {
+                    project: "Calculator Web Tool",
+                    skills: ["Functions across operations"],
+                    elements: "Addition, Subtraction, Multiplication via UI"
+                },
+                outcome: "Students can design algorithms before coding and build a functional calculator."
+            },
+            {
+                week: 8, phase: 2,
+                title: "Debugging and Testing",
+                lesson: {
+                    topics: ["Syntax Errors", "Logic Errors", "Runtime Errors", "Fixing code"],
+                    code: "// Activity: Analyze and fix broken code examples."
+                },
+                lab: {
+                    project: "Debug Previous Work",
+                    skills: ["Testing methodology", "Code refactoring"],
+                    elements: "Debug Calculator, Debug Quiz App, Add improvements"
+                },
+                outcome: "Students can identify, debug, and fix different types of programming errors."
+            },
+            // Phase 3
+            {
+                week: 9, phase: 3,
+                title: "Problem Identification",
+                lesson: {
+                    topics: ["Framework: Problem Analysis", "Who? Why? How often? What solutions?"],
+                    code: "// Examples:\nHomework planner, Study timer, Grade calculator..."
+                },
+                lab: {
+                    project: "Brainstorming Session",
+                    skills: ["Feasibility check", "Requirements gathering"],
+                    elements: "Team selects ONE main project to build"
+                },
+                outcome: "Team identifies a real problem and selects their hackathon project."
+            },
+            {
+                week: 10, phase: 3,
+                title: "Prototype Development",
+                lesson: {
+                    topics: ["MVP (Minimum Viable Product)", "Iterative development", "User feedback"],
+                    code: ""
+                },
+                lab: {
+                    project: "Build Core Prototype",
+                    skills: ["Full stack development applied"],
+                    elements: "User interface, Core functions, Basic navigation"
+                },
+                outcome: "Functional prototype with core features completed."
+            },
+            {
+                week: 11, phase: 3,
+                title: "Testing and Improvement",
+                lesson: {
+                    topics: ["Unit testing", "Integration testing", "User acceptance testing"],
+                    code: ""
+                },
+                lab: {
+                    project: "System Testing & Polishing",
+                    skills: ["UX Refinement", "Bug squashing"],
+                    elements: "Add new features, Fix bugs, Improve design"
+                },
+                outcome: "Polished, tested, and improved project ready for presentation."
+            },
+            {
+                week: 12, phase: 3,
+                title: "Mini Hackathon and Presentation",
+                lesson: {
+                    topics: ["Professional Presentation", "Tech Demos"],
+                    code: "Roles:\n- Problem Expert\n- Tech Lead\n- QA Lead\n- Product Demo"
+                },
+                lab: {
+                    project: "SIMULATED HACKATHON",
+                    skills: ["Public speaking", "Pitching"],
+                    elements: "Final code polish (45m), Prep presentation (15m), Presentations! (30m)"
+                },
+                outcome: "Professional presentation of complete hackathon project."
+            }
+        ];
+
+        function createWeekHTML(data) {
+            let codeBlock = data.lesson.code ? `<div class="mini-code">${data.lesson.code}</div>` : '';
+            return `
+                <div class="week-card">
+                    <div class="week-header" onclick="toggleWeek(this)">
+                        <div class="week-title">
+                            <span class="week-badge">Week ${data.week}</span>
+                            <span class="week-name">${data.title}</span>
+                        </div>
+                        <div class="week-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="week-content">
+                        <div class="week-grid">
+                            <div class="split-box">
+                                <h4><i class="fas fa-chalkboard-teacher"></i> IGCSE Lesson (45 min)</h4>
+                                <ul>
+                                    ${data.lesson.topics.map(t => `<li>${t}</li>`).join('')}
+                                </ul>
+                                ${codeBlock}
+                            </div>
+                            <div class="split-box" style="background: rgba(6, 182, 212, 0.05); border-color: rgba(6, 182, 212, 0.1);">
+                                <h4 style="color: var(--secondary);"><i class="fas fa-laptop-code"></i> Hackathon Lab (45 min)</h4>
+                                <div style="margin-bottom:1rem;">
+                                    <strong>Project:</strong> <span style="color:white;">${data.lab.project}</span>
+                                </div>
+                                <div style="margin-bottom:1rem;">
+                                    <strong>Skills/Tasks:</strong>
+                                    <div style="margin-top:8px;">
+                                        ${data.lab.skills.map(s => `<span class="tag blue">${s}</span>`).join('')}
+                                    </div>
+                                </div>
+                                <div>
+                                    <strong>Focus/Elements:</strong>
+                                    <p style="color:var(--text-muted); font-size:0.9rem; margin-top:5px;">${data.lab.elements}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(139, 92, 246, 0.1); border-radius: 8px; border-left: 4px solid var(--primary);">
+                            <strong style="color: white;">Outcome:</strong>
+                            <p style="color: #cbd5e1; margin-top: 5px; font-size: 0.95rem;">${data.outcome}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render curriculum
+        document.getElementById('phase1-container').innerHTML = curriculumData.filter(d => d.phase === 1).map(createWeekHTML).join('');
+        document.getElementById('phase2-container').innerHTML = curriculumData.filter(d => d.phase === 2).map(createWeekHTML).join('');
+        document.getElementById('phase3-container').innerHTML = curriculumData.filter(d => d.phase === 3).map(createWeekHTML).join('');
+
+        // Expand/Collapse logic
+        function toggleWeek(el) {
+            const card = el.parentElement;
+            card.classList.toggle('active');
+        }
+
+        // Sidebar Active State
+        const sections = document.querySelectorAll("section");
+        const navLi = document.querySelectorAll(".nav-links li a");
+
+        window.onscroll = () => {
+            var current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLi.forEach((a) => {
+                a.classList.remove("active");
+                if (a.getAttribute("href").includes(current)) {
+                    a.classList.add("active");
+                }
+            });
+            
+            // Re-trigger fade animations
+            const fades = document.querySelectorAll('.fade-in');
+            fades.forEach(f => {
+                const rect = f.getBoundingClientRect();
+                if(rect.top < window.innerHeight - 100) {
+                    f.style.opacity = "1";
+                    f.style.animation = "fadeInDown 0.6s ease-out forwards";
+                }
+            });
+        };
+
+        // Trigger initial active state setup
+        window.dispatchEvent(new Event('scroll'));
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.querySelector('.sidebar').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
