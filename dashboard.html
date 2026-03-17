@@ -612,14 +612,69 @@
             .week-grid { grid-template-columns: 1fr; }
         }
 
+        /* Mobile Bottom Nav */
+        .mobile-bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            background: rgba(9, 9, 11, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
+            padding: 6px 8px;
+            padding-bottom: max(6px, env(safe-area-inset-bottom));
+        }
+
+        .mobile-bottom-nav-inner {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .mobile-bottom-nav a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.6rem;
+            font-weight: 500;
+            padding: 6px 4px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            min-width: 44px;
+            min-height: 44px;
+            justify-content: center;
+        }
+
+        .mobile-bottom-nav a.active {
+            color: var(--primary);
+        }
+
+        .mobile-bottom-nav a i {
+            font-size: 1.1rem;
+        }
+
         @media (max-width: 768px) {
+            /* Show bottom nav and menu button */
+            .mobile-bottom-nav { display: block; }
+            .mobile-menu-btn { display: flex !important; }
+
+            /* Sidebar slide-in */
             .sidebar { 
                 transform: translateX(-100%); 
                 transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                width: 260px;
+                width: 280px;
                 box-shadow: 20px 0 50px rgba(0,0,0,0.5);
             }
             .sidebar.open { transform: translateX(0); }
+
+            /* Sidebar overlay */
             .sidebar-overlay {
                 display: none;
                 position: fixed;
@@ -632,58 +687,164 @@
                 z-index: 90;
             }
             .sidebar-overlay.open { display: block; }
-            .hero-banner { height: 220px; border-radius: 16px; margin-bottom: 2rem; }
-            .hero-overlay { padding: 1.5rem; }
-            .hero-overlay h1 { font-size: 2.2rem !important; }
-            .hero-overlay .subtitle { font-size: 0.7rem; }
-            
-            .main-content { margin-left: 0; padding: 1.25rem; }
+
+            /* Close button inside sidebar */
+            .sidebar-close {
+                display: flex !important;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                background: rgba(255,255,255,0.08);
+                border: 1px solid rgba(255,255,255,0.1);
+                color: white;
+                width: 36px;
+                height: 36px;
+                border-radius: 10px;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: background 0.2s;
+                font-size: 1.1rem;
+            }
+            .sidebar-close:hover { background: rgba(244,63,94,0.3); }
+
+            /* Main content spacing */
+            .main-content { 
+                margin-left: 0; 
+                padding: 1rem 1rem 5rem 1rem; /* extra bottom for bottom nav */
+            }
             header { margin-bottom: 2rem; }
-            h1 { font-size: 1.8rem; word-break: break-word; }
-            .header-meta { font-size: 0.85rem; gap: 0.5rem; display: grid; grid-template-columns: 1fr; }
-            .meta-item { width: 100%; border-radius: 12px; }
+
+            /* Hero banner */
+            .hero-banner { height: 200px; border-radius: 16px; margin-bottom: 1.5rem; }
+            .hero-overlay { padding: 1.25rem; }
+            .hero-overlay h1 { font-size: 1.8rem !important; }
+            .hero-overlay .subtitle { font-size: 0.7rem; letter-spacing: 1.5px; }
+
+            /* Typography */
+            h1 { font-size: 1.6rem; word-break: break-word; }
+            h2 { font-size: 1.3rem; }
             
-            .section-header h2 { font-size: 1.4rem; }
-            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 1rem; }
-            .glass-card { padding: 1.5rem; }
+            /* Header meta — 2-column grid */
+            .header-meta { 
+                font-size: 0.8rem; 
+                gap: 0.5rem; 
+                display: grid; 
+                grid-template-columns: 1fr 1fr; 
+            }
+            .header-meta span {
+                padding: 8px 10px;
+                font-size: 0.75rem;
+                gap: 6px;
+            }
+
+            /* Section headers */
+            .section-header { margin-bottom: 1.5rem; padding-bottom: 0.75rem; }
+            .section-header h2 { font-size: 1.25rem; }
+            .section-icon { width: 38px; height: 38px; font-size: 1.2rem; border-radius: 10px; }
+
+            /* Grids — single column */
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 0.75rem; }
             
-            .week-header { padding: 1rem; flex-direction: column; align-items: flex-start; gap: 0.8rem; }
-            .week-title { gap: 0.8rem; }
-            .week-badge { padding: 0.3rem 0.8rem; font-size: 0.8rem; }
-            .week-name { font-size: 1rem; line-height: 1.3; }
-            .week-toggle { align-self: flex-end; width: 28px; height: 28px; }
+            /* Cards — tighter padding */
+            .glass-card { 
+                padding: 1.25rem; 
+                border-radius: 14px;
+            }
+            .glass-card:hover {
+                transform: none; /* disable hover lift on touch */
+            }
+            .card-icon { font-size: 1.5rem; padding: 0.75rem; margin-bottom: 1rem; }
+
+            /* Sections spacing */
+            section { margin-bottom: 3rem; }
+
+            /* Tables — horizontal scroll */
+            .table-wrap { 
+                border-radius: 12px;
+                -webkit-overflow-scrolling: touch;
+            }
+            th, td { 
+                padding: 0.8rem 1rem; 
+                font-size: 0.85rem; 
+                white-space: nowrap;
+            }
             
-            .week-card.active .week-content { padding: 1.25rem 0.75rem; }
-            .split-box { padding: 1rem; }
-            .mini-code { font-size: 0.8rem; padding: 0.75rem; }
+            /* Week cards */
+            .week-card { border-radius: 12px; }
+            .week-header { 
+                padding: 1rem; 
+                flex-direction: row; 
+                align-items: center; 
+                gap: 0.75rem;
+                min-height: 56px; /* touch-friendly height */
+            }
+            .week-title { gap: 0.75rem; flex: 1; }
+            .week-badge { padding: 0.3rem 0.7rem; font-size: 0.75rem; }
+            .week-name { font-size: 0.95rem; line-height: 1.3; }
+            .week-toggle { 
+                width: 32px; 
+                height: 32px; 
+                flex-shrink: 0;
+            }
+            
+            .week-card.active .week-content { padding: 1rem; }
+            .split-box { padding: 0.9rem; border-radius: 10px; }
+            .mini-code { font-size: 0.75rem; padding: 0.6rem; border-radius: 6px; }
+
+            /* Tags */
+            .tag { font-size: 0.7rem; padding: 3px 8px; }
+
+            /* Stat card value */
+            .stat-card .value { font-size: 2rem; }
         }
 
         @media (max-width: 480px) {
-            h1 { font-size: 1.6rem; }
-            .hero-banner { height: 180px; }
-            .hero-overlay h1 { font-size: 1.8rem !important; }
+            h1 { font-size: 1.4rem; }
+            .hero-banner { height: 160px; border-radius: 12px; }
+            .hero-overlay h1 { font-size: 1.5rem !important; }
+            .hero-overlay { padding: 1rem; }
+
+            .main-content { padding: 0.75rem 0.75rem 5rem 0.75rem; }
+            .glass-card { padding: 1rem; border-radius: 12px; }
+            .section-header h2 { font-size: 1.1rem; }
+            .section-icon { width: 34px; height: 34px; font-size: 1rem; }
+
+            /* Header meta stacks fully */
+            .header-meta { grid-template-columns: 1fr; }
+
+            /* Stat card */
+            .stat-card .value { font-size: 1.8rem; }
+            .stat-card .label { font-size: 0.8rem; }
         }
+
+        /* Sidebar close button - hidden on desktop */
+        .sidebar-close { display: none; }
 
         .mobile-menu-btn {
             display: none;
             position: fixed;
-            top: 1.5rem;
-            right: 1.5rem;
+            top: 1rem;
+            right: 1rem;
             z-index: 1000;
-            background: rgba(139, 92, 246, 0.2);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(9, 9, 11, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             color: white;
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
 
-        .mobile-menu-btn:hover {
+        .mobile-menu-btn:active {
             background: var(--primary);
-            transform: scale(1.05);
+            transform: scale(0.95);
         }
 
         .mobile-menu-btn i {
@@ -708,18 +869,21 @@
     <div class="sidebar-overlay" onclick="toggleMenu()"></div>
 
     <nav class="sidebar">
+        <button class="sidebar-close" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
         <div class="logo">
             <i class="fas fa-brain" style="color: var(--secondary);"></i>
             <span>Eduable</span>
         </div>
         <ul class="nav-links">
             <li><a href="#overview" class="active"><i class="fas fa-chart-pie"></i> Program Overview</a></li>
+            <li><a href="#objectives"><i class="fas fa-bullseye"></i> Objectives</a></li>
             <li><a href="#roles"><i class="fas fa-users-cog"></i> Team Roles</a></li>
             <li><a href="#phases"><i class="fas fa-road"></i> Phase Roadmap</a></li>
             <li><a href="#curriculum"><i class="fas fa-book-open"></i> Weekly Curriculum</a></li>
-            <li><a href="#portfolio"><i class="fas fa-project-diagram"></i> Project Portfolio</a></li>
-            <li><a href="#outcomes"><i class="fas fa-award"></i> Checkpoints & Outcomes</a></li>
+            <li><a href="#portfolio"><i class="fas fa-project-diagram"></i> Portfolio & Checkpoints</a></li>
             <li><a href="#resources"><i class="fas fa-tools"></i> Resources & Notes</a></li>
+            <li><a href="#parents"><i class="fas fa-heart"></i> Note to Parents</a></li>
+
         </ul>
         <div style="margin-top: auto;">
             <button onclick="window.print()" style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: rgba(255,255,255,0.1); color: white; cursor: pointer; transition: 0.3s; font-weight: bold; border: 1px solid rgba(255,255,255,0.2);">
@@ -740,16 +904,29 @@
             
             <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem;">
                 <div style="flex: 1; min-width: 300px;">
-                    <span class="subtitle">Official 12-Week Curriculum</span>
+                    <span class="subtitle">Official 20-Week Training Program</span>
                     <h1 style="font-size: 2.8rem; line-height: 1.1; margin-bottom: 0;">IGCSE Computer Science &<br><span class="gradient-text">Innovation Hackathon</span></h1>
                 </div>
                 <div class="header-meta">
+                    <span class="meta-item"><i class="fas fa-chalkboard-teacher"></i> Mr. Theophilus Ayepeh</span>
                     <span class="meta-item"><i class="far fa-clock"></i> 90m Weekly</span>
                     <span class="meta-item"><i class="fas fa-user-friends"></i> 4 Students</span>
-                    <span class="meta-item"><i class="fas fa-user-graduate"></i> IGCSE Level</span>
+                    <span class="meta-item"><i class="fas fa-user-graduate"></i> Ages 14–16</span>
                 </div>
             </div>
         </header>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav">
+        <div class="mobile-bottom-nav-inner">
+            <a href="#overview" class="active"><i class="fas fa-chart-pie"></i><span>Overview</span></a>
+            <a href="#objectives"><i class="fas fa-bullseye"></i><span>Goals</span></a>
+            <a href="#phases"><i class="fas fa-road"></i><span>Phases</span></a>
+            <a href="#curriculum"><i class="fas fa-book-open"></i><span>Weeks</span></a>
+            <a href="#portfolio"><i class="fas fa-briefcase"></i><span>Projects</span></a>
+            <a href="#parents"><i class="fas fa-heart"></i><span>Parents</span></a>
+        </div>
+    </nav>
 
         <!-- Overview Section -->
         <section id="overview" class="fade-in" style="animation-delay: 0.1s;">
@@ -760,29 +937,89 @@
             <div class="grid-2">
                 <div class="glass-card stat-card">
                     <div class="card-icon"><i class="fas fa-hourglass-half"></i></div>
-                    <div class="value">12</div>
+                    <div class="value">20</div>
                     <div class="label">Weeks Duration (3 Phases)</div>
                     <p style="color: var(--text-muted); margin-top: 1rem;">Comprehensive journey from computational thinking to full prototype development.</p>
                 </div>
                 
                 <div class="glass-card">
-                    <h3 style="margin-bottom: 1.5rem; display:flex; align-items:center; gap:10px;"><i class="fas fa-clock" style="color:var(--secondary)"></i> Session Split (90 mins Total)</h3>
-                    <div style="display:flex; flex-direction:column; gap:15px;">
-                        <div style="background: rgba(139, 92, 246, 0.1); border: 1px solid var(--primary); padding: 1rem; border-radius: 8px; display:flex; justify-content:space-between; align-items:center;">
+                    <h3 style="margin-bottom: 1.5rem; display:flex; align-items:center; gap:10px;"><i class="fas fa-clock" style="color:var(--secondary)"></i> Session Methodology (90 mins)</h3>
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <div style="background: rgba(139, 92, 246, 0.1); border: 1px solid var(--primary); padding: 0.8rem 1rem; border-radius: 8px; display:flex; justify-content:space-between; align-items:center;">
                             <div>
-                                <span style="font-weight:bold; color:white; display:block;">IGCSE Lesson</span>
-                                <span style="font-size:0.85rem; color:var(--text-muted);">Theory & Concepts</span>
+                                <span style="font-weight:bold; color:white; display:block;">Concept Explanation</span>
+                                <span style="font-size:0.8rem; color:var(--text-muted);">Core theory & logic</span>
                             </div>
-                            <span style="font-size:1.5rem; font-weight:800; color:var(--primary);">45m</span>
+                            <span style="font-size:1.3rem; font-weight:800; color:var(--primary);">15m</span>
                         </div>
-                        <div style="background: rgba(6, 182, 212, 0.1); border: 1px solid var(--secondary); padding: 1rem; border-radius: 8px; display:flex; justify-content:space-between; align-items:center;">
+                        <div style="background: rgba(6, 182, 212, 0.1); border: 1px solid var(--secondary); padding: 0.8rem 1rem; border-radius: 8px; display:flex; justify-content:space-between; align-items:center;">
                             <div>
-                                <span style="font-weight:bold; color:white; display:block;">Hackathon Lab</span>
-                                <span style="font-size:0.85rem; color:var(--text-muted);">Hands-on Coding</span>
+                                <span style="font-weight:bold; color:white; display:block;">Guided Demonstration</span>
+                                <span style="font-size:0.8rem; color:var(--text-muted);">Instructor-led examples</span>
                             </div>
-                            <span style="font-size:1.5rem; font-weight:800; color:var(--secondary);">45m</span>
+                            <span style="font-size:1.3rem; font-weight:800; color:var(--secondary);">20m</span>
+                        </div>
+                        <div style="background: rgba(244, 63, 94, 0.1); border: 1px solid var(--accent); padding: 0.8rem 1rem; border-radius: 8px; display:flex; justify-content:space-between; align-items:center;">
+                            <div>
+                                <span style="font-weight:bold; color:white; display:block;">Project Work</span>
+                                <span style="font-size:0.8rem; color:var(--text-muted);">Independent / pair programming</span>
+                            </div>
+                            <span style="font-size:1.3rem; font-weight:800; color:var(--accent);">35m</span>
+                        </div>
+                        <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; padding: 0.8rem 1rem; border-radius: 8px; display:flex; justify-content:space-between; align-items:center;">
+                            <div>
+                                <span style="font-weight:bold; color:white; display:block;">Debug & Review + Reflection</span>
+                                <span style="font-size:0.8rem; color:var(--text-muted);">Error fixing & discussion</span>
+                            </div>
+                            <span style="font-size:1.3rem; font-weight:800; color:#10b981;">20m</span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Program Objectives -->
+        <section id="objectives" class="fade-in" style="animation-delay: 0.15s;">
+            <div class="section-header">
+                <div class="section-icon"><i class="fas fa-bullseye" style="color:white;"></i></div>
+                <h2>Program Objectives</h2>
+            </div>
+            <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.05rem; max-width: 800px;">By the conclusion of this program, students will demonstrate competency in the following areas:</p>
+            <div class="grid-3">
+                <div class="glass-card" style="border-top: 3px solid #8b5cf6;">
+                    <div class="card-icon" style="color:#8b5cf6; background:rgba(139,92,246,0.1);"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Academic Mastery</h3>
+                    <p style="color:var(--text-muted); margin-top:0.8rem; font-size:0.9rem;">Understand fundamental IGCSE Computer Science programming concepts.</p>
+                </div>
+                <div class="glass-card" style="border-top: 3px solid #06b6d4;">
+                    <div class="card-icon" style="color:#06b6d4; background:rgba(6,182,212,0.1);"><i class="fas fa-brain"></i></div>
+                    <h3>Computational Thinking</h3>
+                    <p style="color:var(--text-muted); margin-top:0.8rem; font-size:0.9rem;">Apply algorithm design and logical problem-solving strategies.</p>
+                </div>
+                <div class="glass-card" style="border-top: 3px solid #ec4899;">
+                    <div class="card-icon" style="color:#ec4899; background:rgba(236,72,153,0.1);"><i class="fas fa-code"></i></div>
+                    <h3>Technical Proficiency</h3>
+                    <p style="color:var(--text-muted); margin-top:0.8rem; font-size:0.9rem;">Write structured code using variables, conditions, loops, and functions.</p>
+                </div>
+                <div class="glass-card" style="border-top: 3px solid #10b981;">
+                    <div class="card-icon" style="color:#10b981; background:rgba(16,185,129,0.1);"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Quality Assurance</h3>
+                    <p style="color:var(--text-muted); margin-top:0.8rem; font-size:0.9rem;">Debug, test, and refine programs effectively.</p>
+                </div>
+                <div class="glass-card" style="border-top: 3px solid #f59e0b;">
+                    <div class="card-icon" style="color:#f59e0b; background:rgba(245,158,11,0.1);"><i class="fas fa-people-arrows"></i></div>
+                    <h3>Collaboration</h3>
+                    <p style="color:var(--text-muted); margin-top:0.8rem; font-size:0.9rem;">Work collaboratively within a small development team.</p>
+                </div>
+                <div class="glass-card" style="border-top: 3px solid #3b82f6;">
+                    <div class="card-icon" style="color:#3b82f6; background:rgba(59,130,246,0.1);"><i class="fas fa-trophy"></i></div>
+                    <h3>Hackathon Innovation</h3>
+                    <p style="color:var(--text-muted); margin-top:0.8rem; font-size:0.9rem;">Design, build, and present a functional web application in a team-based hackathon.</p>
+                </div>
+                <div class="glass-card" style="border-top: 3px solid #f43f5e;">
+                    <div class="card-icon" style="color:#f43f5e; background:rgba(244,63,94,0.1);"><i class="fas fa-microphone"></i></div>
+                    <h3>Communication</h3>
+                    <p style="color:var(--text-muted); margin-top:0.8rem; font-size:0.9rem;">Present technical projects confidently in a hackathon setting.</p>
                 </div>
             </div>
         </section>
@@ -825,27 +1062,27 @@
             </div>
             <div class="grid-3">
                 <div class="glass-card phase-card" style="border-left-color: var(--primary);">
-                    <div class="phase-number">Weeks 1-4</div>
+                    <div class="phase-number">Weeks 1-6</div>
                     <h3 style="margin-bottom: 1rem;">Phase 1: Foundations</h3>
                     <p style="color:var(--text-muted);"><b style="color:#fff;">Focus:</b> Computational Thinking</p>
                     <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
-                        <p style="font-size: 0.9rem; color: #cbd5e1;"><i class="fas fa-bullseye" style="color:var(--primary); margin-right:5px;"></i> Core programming logic and algorithm understanding.</p>
+                        <p style="font-size: 0.9rem; color: #cbd5e1;"><i class="fas fa-bullseye" style="color:var(--primary); margin-right:5px;"></i> Mastery of algorithms and basic programming logic.</p>
                     </div>
                 </div>
                 <div class="glass-card phase-card" style="border-left-color: var(--secondary);">
-                    <div class="phase-number">Weeks 5-8</div>
+                    <div class="phase-number">Weeks 7-14</div>
                     <h3 style="margin-bottom: 1rem;">Phase 2: Development</h3>
                     <p style="color:var(--text-muted);"><b style="color:#fff;">Focus:</b> Programming Skills</p>
                     <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
-                        <p style="font-size: 0.9rem; color: #cbd5e1;"><i class="fas fa-bullseye" style="color:var(--secondary); margin-right:5px;"></i> Functional software tools and effective debugging.</p>
+                        <p style="font-size: 0.9rem; color: #cbd5e1;"><i class="fas fa-bullseye" style="color:var(--secondary); margin-right:5px;"></i> Creation of functional coding projects and tools.</p>
                     </div>
                 </div>
                 <div class="glass-card phase-card" style="border-left-color: var(--accent);">
-                    <div class="phase-number">Weeks 9-12</div>
+                    <div class="phase-number">Weeks 15-20</div>
                     <h3 style="margin-bottom: 1rem;">Phase 3: Hackathon</h3>
                     <p style="color:var(--text-muted);"><b style="color:#fff;">Focus:</b> Innovation Project</p>
                     <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
-                        <p style="font-size: 0.9rem; color: #cbd5e1;"><i class="fas fa-bullseye" style="color:var(--accent); margin-right:5px;"></i> Complete prototype from initial idea to final presentation.</p>
+                        <p style="font-size: 0.9rem; color: #cbd5e1;"><i class="fas fa-bullseye" style="color:var(--accent); margin-right:5px;"></i> Design, build, and present a working prototype.</p>
                     </div>
                 </div>
             </div>
@@ -858,17 +1095,17 @@
                 <h2>Detailed Weekly Curriculum</h2>
             </div>
             
-            <h3 style="color: var(--primary); margin-bottom: 1.5rem; margin-top: 2rem;">PHASE 1 (Weeks 1-4)</h3>
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; margin-top: 2rem;">PHASE 1: Foundations (Weeks 1-6)</h3>
             <div class="week-container" id="phase1-container">
                 <!-- JS will populate -->
             </div>
 
-            <h3 style="color: var(--secondary); margin-bottom: 1.5rem; margin-top: 3rem;">PHASE 2 (Weeks 5-8)</h3>
+            <h3 style="color: var(--secondary); margin-bottom: 1.5rem; margin-top: 3rem;">PHASE 2: Development (Weeks 7-14)</h3>
             <div class="week-container" id="phase2-container">
                 <!-- JS will populate -->
             </div>
 
-            <h3 style="color: var(--accent); margin-bottom: 1.5rem; margin-top: 3rem;">PHASE 3 (Weeks 9-12)</h3>
+            <h3 style="color: var(--accent); margin-bottom: 1.5rem; margin-top: 3rem;">PHASE 3: Hackathon (Weeks 15-20)</h3>
             <div class="week-container" id="phase3-container">
                 <!-- JS will populate -->
             </div>
@@ -893,11 +1130,15 @@
                         <tbody>
                             <tr><td>1</td><td>First Webpage</td><td><span class="tag pink">HTML Basics</span></td></tr>
                             <tr><td>2</td><td>Personal Profile</td><td><span class="tag blue">Variables & Data</span></td></tr>
-                            <tr><td>3</td><td>Pass/Fail Calculator</td><td><span class="tag green">Conditional Logic</span></td></tr>
-                            <tr><td>4</td><td>Multiplication Table</td><td><span class="tag purple">Loops</span></td></tr>
-                            <tr><td>5-6</td><td>Quiz Application</td><td><span class="tag pink">Decomposition</span></td></tr>
-                            <tr><td>7</td><td>Calculator</td><td><span class="tag blue">Algorithms</span></td></tr>
-                            <tr><td>9-12</td><td>Hackathon Project</td><td><span class="tag purple">Full-stack</span></td></tr>
+                            <tr><td>3</td><td>Interactive Form</td><td><span class="tag green">Input/Output</span></td></tr>
+                            <tr><td>4</td><td>Pass/Fail Calculator</td><td><span class="tag purple">Conditional Logic</span></td></tr>
+                            <tr><td>5</td><td>Multiplication Table</td><td><span class="tag blue">Loops</span></td></tr>
+                            <tr><td>6</td><td>Mini-Project</td><td><span class="tag pink">Trace Tables</span></td></tr>
+                            <tr><td>7-8</td><td>Quiz Application</td><td><span class="tag green">Functions & Arrays</span></td></tr>
+                            <tr><td>9-10</td><td>Calculator Tool</td><td><span class="tag purple">Algorithms</span></td></tr>
+                            <tr><td>11-13</td><td>Debug & Data Rep</td><td><span class="tag blue">Testing & Binary</span></td></tr>
+                            <tr><td>14</td><td>Mid-Term Project</td><td><span class="tag pink">Full Project</span></td></tr>
+                            <tr><td>15-20</td><td>Hackathon Project</td><td><span class="tag purple">Full-stack</span></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -907,42 +1148,53 @@
                     
                     <div style="display:flex; flex-direction:column; gap:1.5rem;">
                         <div style="border-left: 3px solid var(--primary); padding-left: 1rem;">
-                            <h4 style="color:white; margin:0;">Phase 1 Review (Week 4)</h4>
-                            <p style="color:var(--text-muted); font-size:0.9rem; margin-top:5px;">Algorithm quiz and webpage demonstration.</p>
+                            <h4 style="color:white; margin:0;">Foundation Review (Week 6)</h4>
+                            <p style="color:var(--text-muted); font-size:0.9rem; margin-top:5px;">Algorithm quiz and mini-program demo.</p>
                         </div>
                         <div style="border-left: 3px solid var(--secondary); padding-left: 1rem;">
-                            <h4 style="color:white; margin:0;">Phase 2 Review (Week 8)</h4>
-                            <p style="color:var(--text-muted); font-size:0.9rem; margin-top:5px;">Debugging challenge and calculator demo.</p>
+                            <h4 style="color:white; margin:0;">Development Review (Week 14)</h4>
+                            <p style="color:var(--text-muted); font-size:0.9rem; margin-top:5px;">Submission of a functional coding project.</p>
                         </div>
                         <div style="border-left: 3px solid var(--accent); padding-left: 1rem;">
-                            <h4 style="color:white; margin:0;">Final Assessment (Week 12)</h4>
-                            <p style="color:var(--text-muted); font-size:0.9rem; margin-top:5px;">Hackathon presentation and code review.</p>
+                            <h4 style="color:white; margin:0;">Final Hackathon (Week 20)</h4>
+                            <p style="color:var(--text-muted); font-size:0.9rem; margin-top:5px;">Team project presentation and live demonstration.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Final Sections -->
+        <!-- Resources & Deliverables -->
         <section id="resources">
+            <div class="section-header">
+                <div class="section-icon"><i class="fas fa-tools" style="color:white;"></i></div>
+                <h2>Resources & Deliverables</h2>
+            </div>
             <div class="grid-2">
                 <div class="glass-card">
-                    <h3 style="margin-bottom: 1.5rem; display:flex; align-items:center; gap:10px;"><i class="fas fa-box-open" style="color:var(--primary)"></i> Program Deliverables</h3>
-                    
-                    <h4 style="font-size: 1rem; color: white;">For Students</h4>
-                    <ul style="font-size: 0.9rem;">
-                        <li>Understanding of IGCSE CS curriculum</li>
-                        <li>Portfolio of 6 completed coding projects</li>
-                        <li>Collaborative team working experience</li>
-                        <li>Presentation & communication skills</li>
-                    </ul>
-                    
-                    <h4 style="font-size: 1rem; color: white; margin-top:1rem;">For Parents</h4>
-                    <ul style="font-size: 0.9rem;">
-                        <li>Weekly progress updates</li>
-                        <li>Access to student project portfolio</li>
-                        <li>Final presentation event invitation</li>
-                    </ul>
+                    <h3 style="margin-bottom: 1.5rem; display:flex; align-items:center; gap:10px;"><i class="fas fa-box-open" style="color:var(--primary)"></i> Expected Learning Outcomes</h3>
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                        <div style="display:flex; align-items:center; gap:12px; padding:10px; background:rgba(139,92,246,0.08); border-radius:8px;">
+                            <i class="fas fa-check-circle" style="color:#4ade80; font-size:1.1rem;"></i>
+                            <span style="color:#e2e8f0; font-size:0.95rem;">Understand key IGCSE programming concepts</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px; padding:10px; background:rgba(139,92,246,0.08); border-radius:8px;">
+                            <i class="fas fa-check-circle" style="color:#4ade80; font-size:1.1rem;"></i>
+                            <span style="color:#e2e8f0; font-size:0.95rem;">Write simple algorithms and pseudocode</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px; padding:10px; background:rgba(139,92,246,0.08); border-radius:8px;">
+                            <i class="fas fa-check-circle" style="color:#4ade80; font-size:1.1rem;"></i>
+                            <span style="color:#e2e8f0; font-size:0.95rem;">Build basic interactive programs</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px; padding:10px; background:rgba(139,92,246,0.08); border-radius:8px;">
+                            <i class="fas fa-check-circle" style="color:#4ade80; font-size:1.1rem;"></i>
+                            <span style="color:#e2e8f0; font-size:0.95rem;">Work effectively within a development team</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px; padding:10px; background:rgba(139,92,246,0.08); border-radius:8px;">
+                            <i class="fas fa-check-circle" style="color:#4ade80; font-size:1.1rem;"></i>
+                            <span style="color:#e2e8f0; font-size:0.95rem;">Present a technology project confidently to an audience</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="glass-card">
@@ -961,21 +1213,40 @@
                 </div>
             </div>
         </section>
-        
+
+        <!-- Note to Parents -->
+        <section id="parents" class="fade-in">
+            <div class="section-header">
+                <div class="section-icon" style="background: linear-gradient(135deg, #f43f5e, #ec4899);"><i class="fas fa-heart" style="color:white;"></i></div>
+                <h2>Note to Parents</h2>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card" style="border-left: 4px solid #f59e0b;">
+                    <h3 style="margin-bottom: 1rem; display:flex; align-items:center; gap:10px;"><i class="fas fa-star" style="color:#f59e0b;"></i> Skill Development Over Competition</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">This program prioritizes <strong style="color:white;">learning and skill acquisition</strong> above competition rankings. The hackathon component is designed to provide students with experience in applying their knowledge, rather than pressuring them to create highly complex commercial software.</p>
+                </div>
+                <div class="glass-card" style="border-left: 4px solid #10b981;">
+                    <h3 style="margin-bottom: 1rem; display:flex; align-items:center; gap:10px;"><i class="fas fa-seedling" style="color:#10b981;"></i> Long-Term Value</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">Students will develop <strong style="color:white;">problem-solving, logical thinking, creativity, and teamwork</strong>. These are transferable skills essential for Computer Science examinations and valuable across many future career paths.</p>
+                </div>
+            </div>
+        </section>
+
+
         <footer style="text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem;">
-            Document prepared for IGCSE Computer Science and Innovation Hackathon Lab Program<br>
-            12-Week Curriculum | 90-Minute Weekly Sessions | 4-Student Teams
+            IGCSE Computer Science & Innovation Hackathon Lab<br>
+            20-Week Training Program | 90-Minute Weekly Sessions | 4-Student Cohort
         </footer>
     </main>
 
     <script>
         const curriculumData = [
-            // Phase 1
+            // Phase 1: Foundations of Computational Thinking (Weeks 1-6)
             {
                 week: 1, phase: 1,
-                title: "Intro to CS and Algorithms",
+                title: "Introduction to Computer Science & Algorithms",
                 lesson: {
-                    topics: ["What is Computer Science?", "Computational Thinking", "Algorithms", "Flowchart symbols"],
+                    topics: ["What is Computer Science?", "Computational Thinking & Algorithms", "Flowchart symbols"],
                     code: "1. Start\n2. Enter password\n3. Check password\n4. IF correct - Grant access\n   ELSE - Show error\n5. End"
                 },
                 lab: {
@@ -987,7 +1258,7 @@
             },
             {
                 week: 2, phase: 1,
-                title: "Variables and Data",
+                title: "Variables and Data Types",
                 lesson: {
                     topics: ["Variables", "Data Types (Integer, String, Boolean)", "Trace tables"],
                     code: "INPUT name\nINPUT age\nDISPLAY name\nDISPLAY age"
@@ -1001,7 +1272,21 @@
             },
             {
                 week: 3, phase: 1,
-                title: "Conditions (Decision Making)",
+                title: "Input and Output Mechanisms",
+                lesson: {
+                    topics: ["Input and Output operations", "User interaction patterns", "Capturing data from users"],
+                    code: "INPUT userAge\nIF userAge >= 18 THEN\n    DISPLAY \"Adult\"\nELSE\n    DISPLAY \"Minor\"\nENDIF"
+                },
+                lab: {
+                    project: "Interactive Form Page",
+                    skills: ["Form inputs", "Capturing user data", "Displaying responses"],
+                    elements: "Text inputs, Submit button, Dynamic output display"
+                },
+                outcome: "Students understand input/output mechanisms and can build interactive web forms."
+            },
+            {
+                week: 4, phase: 1,
+                title: "Decision Making (IF/ELSE Conditions)",
                 lesson: {
                     topics: ["IF/ELSE Statements", "Writing pseudocode with conditions"],
                     code: "IF score >= 50 THEN\n    DISPLAY \"PASS\"\nELSE\n    DISPLAY \"FAIL\"\nENDIF"
@@ -1014,132 +1299,230 @@
                 outcome: "Students understand decision-making in programs and practical use of IF statements."
             },
             {
-                week: 4, phase: 1,
-                title: "Loops",
+                week: 5, phase: 1,
+                title: "Repetition and Logic (FOR/WHILE Loops)",
                 lesson: {
                     topics: ["Repetition", "FOR loop (counted)", "WHILE loop (conditional)"],
                     code: "FOR i = 1 TO 10\n    DISPLAY i\nNEXT i"
                 },
                 lab: {
                     project: "Multiplication Table Generator",
-                    skills: ["JavaScript loop implementation"],
-                    elements: "User enters number -> Generates table (e.g. 5x1=5)"
+                    skills: ["JavaScript loop implementation", "Document formatting"],
+                    elements: "User enters number -> Generates full times table up to 10"
                 },
-                outcome: "Students understand repetition and loop logic."
+                outcome: "Students understand repetition and mathematical loop logic."
             },
-            // Phase 2
             {
-                week: 5, phase: 2,
-                title: "Problem Decomposition",
+                week: 6, phase: 1,
+                title: "Trace Tables and Debugging Fundamentals",
                 lesson: {
-                    topics: ["Problem Decomposition", "Design modular systems"],
-                    code: "Quiz Components:\n1. Question display\n2. Answer options\n3. Score tracking\n4. Result display"
+                    topics: ["Trace tables for tracking values", "Basic debugging strategies", "Identifying common errors"],
+                    code: "x = 1\nWHILE x <= 5\n    DISPLAY x\n    x = x + 1\nENDWHILE\n// Trace: x = 1, 2, 3, 4, 5"
+                },
+                lab: {
+                    project: "Mini-Project Showcase",
+                    skills: ["Trace table creation", "Debugging practice"],
+                    elements: "Complete a Pass/Fail Calculator or Multiplication Table Generator"
+                },
+                outcome: "Students can trace program execution and identify basic errors. Phase 1 assessment: Algorithm quiz and mini-program demo."
+            },
+            // Phase 2: Programming Development Skills (Weeks 7-14)
+            {
+                week: 7, phase: 2,
+                title: "Functions and Modular Programming",
+                lesson: {
+                    topics: ["Functions and modularity", "Reusable code blocks", "Parameters and return values"],
+                    code: "FUNCTION add(a, b)\n    RETURN a + b\nENDFUNCTION\n\nresult = add(5, 3)\nDISPLAY result"
+                },
+                lab: {
+                    project: "Modular Calculator",
+                    skills: ["Writing functions", "Calling functions", "Code organization"],
+                    elements: "Separate functions for add, subtract, multiply, divide"
+                },
+                outcome: "Students understand modular programming and can write reusable functions."
+            },
+            {
+                week: 8, phase: 2,
+                title: "Arrays and Data Storage",
+                lesson: {
+                    topics: ["Arrays and lists", "Storing and retrieving data", "Iterating through arrays"],
+                    code: "names = [\"Alice\", \"Bob\", \"Charlie\"]\nFOR i = 0 TO LENGTH(names) - 1\n    DISPLAY names[i]\nNEXT i"
                 },
                 lab: {
                     project: "Quiz Application (Start)",
-                    skills: ["HTML structuring", "Basic JS Logic"],
+                    skills: ["Array manipulation", "Question storage", "Basic JS logic"],
                     elements: "Question display, Multiple choice options, Score variable"
                 },
-                outcome: "Students can break down complex problems and begin building a quiz application."
+                outcome: "Students understand arrays and begin building a multi-question quiz application."
             },
             {
-                week: 6, phase: 2,
-                title: "Data Representation",
+                week: 9, phase: 2,
+                title: "Problem Decomposition Techniques",
                 lesson: {
-                    topics: ["Binary numbers", "ASCII encoding", "Data storage"],
-                    code: "Decimal 5 = Binary 101\nDecimal 8 = Binary 1000"
+                    topics: ["Breaking problems into sub-problems", "Designing modular systems", "Stepwise refinement"],
+                    code: "Quiz Components:\n1. Question display\n2. Answer options\n3. Score tracking\n4. Result display"
                 },
                 lab: {
                     project: "Quiz Application (Enhancement)",
-                    skills: ["Advanced logic mapping"],
+                    skills: ["Multi-part app design", "Advanced logic mapping"],
                     elements: "Multiple questions, Score counter, Result message display"
                 },
-                outcome: "Students understand data representation and enhance their quiz with multiple questions."
+                outcome: "Students can decompose complex problems and enhance their quiz with full scoring logic."
             },
             {
-                week: 7, phase: 2,
-                title: "Algorithm Design",
+                week: 10, phase: 2,
+                title: "Advanced Algorithm Design",
                 lesson: {
-                    topics: ["Designing algorithms before coding", "Writing clear pseudocode"],
-                    code: "IF op = \"add\" THEN\n  res = n1 + n2\nELSE IF op = \"subtract\" THEN\n  res = n1 - n2"
+                    topics: ["Designing algorithms before coding", "Writing clear pseudocode", "Efficiency considerations"],
+                    code: "IF op = \"add\" THEN\n  res = n1 + n2\nELSE IF op = \"subtract\" THEN\n  res = n1 - n2\nENDIF"
                 },
                 lab: {
                     project: "Calculator Web Tool",
-                    skills: ["Functions across operations"],
-                    elements: "Addition, Subtraction, Multiplication via UI"
+                    skills: ["Functions across operations", "Algorithm-first approach"],
+                    elements: "Addition, Subtraction, Multiplication, Division via UI buttons"
                 },
                 outcome: "Students can design algorithms before coding and build a functional calculator."
             },
             {
-                week: 8, phase: 2,
-                title: "Debugging and Testing",
+                week: 11, phase: 2,
+                title: "Debugging Techniques and Best Practices",
                 lesson: {
-                    topics: ["Syntax Errors", "Logic Errors", "Runtime Errors", "Fixing code"],
-                    code: "// Activity: Analyze and fix broken code examples."
+                    topics: ["Syntax Errors", "Logic Errors", "Runtime Errors", "Systematic debugging"],
+                    code: "// Activity: Analyze and fix broken code examples.\n// Common errors:\n// 1. Missing semicolons\n// 2. Wrong variable names\n// 3. Infinite loops"
                 },
                 lab: {
                     project: "Debug Previous Work",
-                    skills: ["Testing methodology", "Code refactoring"],
-                    elements: "Debug Calculator, Debug Quiz App, Add improvements"
+                    skills: ["Testing methodology", "Code refactoring", "QA practices"],
+                    elements: "Debug Calculator, Fix Quiz App issues, Add visual improvements"
                 },
-                outcome: "Students can identify, debug, and fix different types of programming errors."
+                outcome: "Students can systematically identify, trace, and repair different types of code errors."
             },
-            // Phase 3
             {
-                week: 9, phase: 3,
+                week: 12, phase: 2,
+                title: "Systematic Testing Programs",
+                lesson: {
+                    topics: ["Test planning", "Edge case identification", "Normal, boundary, and erroneous data"],
+                    code: "// Test Plan:\n// Input: 50  -> Expected: PASS\n// Input: 49  -> Expected: FAIL\n// Input: -1  -> Expected: ERROR\n// Input: 100 -> Expected: PASS"
+                },
+                lab: {
+                    project: "Test & Improve Applications",
+                    skills: ["Writing test cases", "Edge case testing"],
+                    elements: "Test previous projects with boundary values and invalid inputs"
+                },
+                outcome: "Students understand systematic testing and can create test plans for their programs."
+            },
+            {
+                week: 13, phase: 2,
+                title: "Data Representation (Binary and ASCII)",
+                lesson: {
+                    topics: ["Binary number system", "ASCII encoding", "Data storage concepts"],
+                    code: "Decimal 5  = Binary 101\nDecimal 8  = Binary 1000\nDecimal 13 = Binary 1101\n\nASCII 'A' = 65\nASCII 'a' = 97"
+                },
+                lab: {
+                    project: "Binary/ASCII Converter Tool",
+                    skills: ["Number conversion logic", "String manipulation"],
+                    elements: "Decimal to Binary converter, Character to ASCII display"
+                },
+                outcome: "Students understand low-level data representation and can build conversion tools."
+            },
+            {
+                week: 14, phase: 2,
+                title: "Mid-Term Programming Project",
+                lesson: {
+                    topics: ["Project planning review", "Code quality standards", "Presentation preparation"],
+                    code: ""
+                },
+                lab: {
+                    project: "Mid-Term Project Showcase",
+                    skills: ["Full project development", "Code review", "Presentation"],
+                    elements: "Complete project: Quiz App, Calculator, or Study Timer"
+                },
+                outcome: "Students demonstrate competency through a complete functional project. Phase 2 assessment: Functional coding project submission."
+            },
+            // Phase 3: Innovation Hackathon Project (Weeks 15-20)
+            {
+                week: 15, phase: 3,
                 title: "Problem Identification",
                 lesson: {
-                    topics: ["Framework: Problem Analysis", "Who? Why? How often? What solutions?"],
-                    code: "// Examples:\nHomework planner, Study timer, Grade calculator..."
+                    topics: ["Problem Analysis Framework", "Who? Why? How often? What exists?"],
+                    code: "// Project Ideas:\n// - Homework Planner\n// - Grade Calculator\n// - Task Management App"
                 },
                 lab: {
                     project: "Brainstorming Session",
-                    skills: ["Feasibility check", "Requirements gathering"],
-                    elements: "Team selects ONE main project to build"
+                    skills: ["Feasibility analysis", "Requirements gathering"],
+                    elements: "Team selects ONE main project to build from scratch"
                 },
-                outcome: "Team identifies a real problem and selects their hackathon project."
+                outcome: "Team identifies a real-world problem and outlines their hackathon app solution."
             },
             {
-                week: 10, phase: 3,
-                title: "Prototype Development",
+                week: 16, phase: 3,
+                title: "Solution Design & Feature Planning",
                 lesson: {
-                    topics: ["MVP (Minimum Viable Product)", "Iterative development", "User feedback"],
+                    topics: ["Wireframing", "User stories", "Feature prioritization", "MVP definition"],
+                    code: ""
+                },
+                lab: {
+                    project: "Design Document & Wireframes",
+                    skills: ["UI/UX planning", "Feature mapping"],
+                    elements: "Paper wireframes, Feature list, User flow diagrams"
+                },
+                outcome: "Team has a clear design document and feature roadmap for their project."
+            },
+            {
+                week: 17, phase: 3,
+                title: "Prototype Development (Core Functionality)",
+                lesson: {
+                    topics: ["MVP development", "Iterative building", "Core-first approach"],
                     code: ""
                 },
                 lab: {
                     project: "Build Core Prototype",
-                    skills: ["Full stack development applied"],
+                    skills: ["Full-stack development", "Integration"],
                     elements: "User interface, Core functions, Basic navigation"
                 },
-                outcome: "Functional prototype with core features completed."
+                outcome: "Functional prototype with core features assembled and working."
             },
             {
-                week: 11, phase: 3,
-                title: "Testing and Improvement",
+                week: 18, phase: 3,
+                title: "Feature Expansion & UI Improvements",
                 lesson: {
-                    topics: ["Unit testing", "Integration testing", "User acceptance testing"],
+                    topics: ["UI/UX best practices", "User feedback integration", "Visual design principles"],
                     code: ""
                 },
                 lab: {
-                    project: "System Testing & Polishing",
-                    skills: ["UX Refinement", "Bug squashing"],
-                    elements: "Add new features, Fix bugs, Improve design"
+                    project: "Feature Enhancement Sprint",
+                    skills: ["Advanced CSS", "Feature expansion"],
+                    elements: "Add secondary features, Improve colors/fonts/layout, Enhance UX"
                 },
-                outcome: "Polished, tested, and improved project ready for presentation."
+                outcome: "Enhanced prototype with additional features and polished user interface."
             },
             {
-                week: 12, phase: 3,
-                title: "Mini Hackathon and Presentation",
+                week: 19, phase: 3,
+                title: "Final Testing and Debugging",
                 lesson: {
-                    topics: ["Professional Presentation", "Tech Demos"],
-                    code: "Roles:\n- Problem Expert\n- Tech Lead\n- QA Lead\n- Product Demo"
+                    topics: ["System testing", "Cross-browser testing", "Final QA checklist"],
+                    code: ""
                 },
                 lab: {
-                    project: "SIMULATED HACKATHON",
-                    skills: ["Public speaking", "Pitching"],
-                    elements: "Final code polish (45m), Prep presentation (15m), Presentations! (30m)"
+                    project: "Final QA & Polish",
+                    skills: ["Bug squashing", "Performance optimization"],
+                    elements: "Test edge cases, Fix remaining bugs, Final design polish"
                 },
-                outcome: "Professional presentation of complete hackathon project."
+                outcome: "A polished, fully tested app ready for formal presentation."
+            },
+            {
+                week: 20, phase: 3,
+                title: "Final Hackathon Presentation & Live Demo",
+                lesson: {
+                    topics: ["Professional Presentation", "Tech Demos", "Pitch structure"],
+                    code: "Presentation Roles:\n- Problem Expert\n- Tech Lead\n- QA Lead\n- Product Demo"
+                },
+                lab: {
+                    project: "FINAL HACKATHON",
+                    skills: ["Public speaking", "Live demos", "Pitching"],
+                    elements: "Final code polish, Prepare presentation, Live Presentations & Demo"
+                },
+                outcome: "Professional presentation and live demonstration of the finished hackathon project."
             }
         ];
 
@@ -1200,9 +1583,10 @@
             card.classList.toggle('active');
         }
 
-        // Sidebar Active State
+        // Sidebar Active State + Bottom Nav
         const sections = document.querySelectorAll("section");
         const navLi = document.querySelectorAll(".nav-links li a");
+        const bottomNavLinks = document.querySelectorAll(".mobile-bottom-nav a");
 
         window.onscroll = () => {
             var current = "";
@@ -1214,6 +1598,13 @@
             });
 
             navLi.forEach((a) => {
+                a.classList.remove("active");
+                if (a.getAttribute("href").includes(current)) {
+                    a.classList.add("active");
+                }
+            });
+
+            bottomNavLinks.forEach((a) => {
                 a.classList.remove("active");
                 if (a.getAttribute("href").includes(current)) {
                     a.classList.add("active");
@@ -1247,11 +1638,23 @@
             }
         }
 
-        // Close sidebar on link click
+        // Close sidebar on link click (both sidebar and bottom nav)
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 if(window.innerWidth <= 768) {
                     toggleMenu();
+                }
+            });
+        });
+
+        // Bottom nav smooth scroll
+        document.querySelectorAll('.mobile-bottom-nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').slice(1);
+                const targetSection = document.getElementById(targetId);
+                if(targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
