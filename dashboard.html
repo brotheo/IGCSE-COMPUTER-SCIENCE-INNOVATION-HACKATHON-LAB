@@ -664,6 +664,7 @@
             /* Show bottom nav and menu button */
             .mobile-bottom-nav { display: block; }
             .mobile-menu-btn { display: flex !important; }
+            #mobileEditToggle { display: flex !important; bottom: 90px !important; } /* Push above mobile nav */
 
             /* Sidebar slide-in */
             .sidebar { 
@@ -711,111 +712,133 @@
             /* Main content spacing */
             .main-content { 
                 margin-left: 0; 
-                padding: 1rem 1rem 5rem 1rem; /* extra bottom for bottom nav */
+                padding: 1rem 1rem 6rem 1rem; /* extra bottom padding for bottom nav & float btn */
             }
-            header { margin-bottom: 2rem; }
+            header { margin-bottom: 2.5rem; }
 
             /* Hero banner */
-            .hero-banner { height: 200px; border-radius: 16px; margin-bottom: 1.5rem; }
-            .hero-overlay { padding: 1.25rem; }
-            .hero-overlay h1 { font-size: 1.8rem !important; }
-            .hero-overlay .subtitle { font-size: 0.7rem; letter-spacing: 1.5px; }
+            .hero-banner { height: auto; min-height: 220px; border-radius: 16px; margin-bottom: 1.5rem; display: flex; align-items: flex-end; }
+            .hero-overlay { padding: 1.5rem; position: relative; bottom: 0; top: auto; transform: none; width: 100%; }
+            .hero-overlay h1 { font-size: 1.8rem !important; line-height: 1.25; margin-bottom: 0.75rem; }
+            .hero-overlay .subtitle { font-size: 0.8rem; letter-spacing: 1px; line-height: 1.5; }
 
             /* Typography */
-            h1 { font-size: 1.6rem; word-break: break-word; }
-            h2 { font-size: 1.3rem; }
+            h1 { font-size: 1.6rem; word-break: break-word; line-height: 1.3; }
+            h2 { font-size: 1.4rem; line-height: 1.3; }
+            p { font-size: 0.95rem; line-height: 1.6; }
             
             /* Header meta — 2-column grid */
             .header-meta { 
-                font-size: 0.8rem; 
-                gap: 0.5rem; 
+                font-size: 0.85rem; 
+                gap: 0.75rem; 
                 display: grid; 
                 grid-template-columns: 1fr 1fr; 
+                margin-top: 1.5rem;
             }
             .header-meta span {
-                padding: 8px 10px;
-                font-size: 0.75rem;
-                gap: 6px;
+                padding: 10px 12px;
+                font-size: 0.8rem;
+                gap: 8px;
+                justify-content: flex-start;
+                border-radius: 8px;
             }
 
             /* Section headers */
-            .section-header { margin-bottom: 1.5rem; padding-bottom: 0.75rem; }
-            .section-header h2 { font-size: 1.25rem; }
-            .section-icon { width: 38px; height: 38px; font-size: 1.2rem; border-radius: 10px; }
+            .section-header { margin-bottom: 2rem; padding-bottom: 0.75rem; }
+            .section-header h2 { font-size: 1.35rem; }
+            .section-icon { width: 42px; height: 42px; font-size: 1.25rem; border-radius: 10px; }
 
             /* Grids — single column */
-            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 0.75rem; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 1rem; }
             
-            /* Cards — tighter padding */
+            /* Cards */
             .glass-card { 
-                padding: 1.25rem; 
-                border-radius: 14px;
+                padding: 1.5rem; 
+                border-radius: 16px;
+                margin-bottom: 0px; 
             }
             .glass-card:hover {
                 transform: none; /* disable hover lift on touch */
             }
-            .card-icon { font-size: 1.5rem; padding: 0.75rem; margin-bottom: 1rem; }
+            .card-icon { font-size: 1.6rem; padding: 0.85rem; margin-bottom: 1.2rem; }
 
             /* Sections spacing */
-            section { margin-bottom: 3rem; }
+            section { margin-bottom: 4rem; }
 
             /* Tables — horizontal scroll */
             .table-wrap { 
-                border-radius: 12px;
+                border-radius: 14px;
                 -webkit-overflow-scrolling: touch;
+                margin-bottom: 1rem;
             }
             th, td { 
-                padding: 0.8rem 1rem; 
+                padding: 1rem; 
                 font-size: 0.85rem; 
                 white-space: nowrap;
             }
             
             /* Week cards */
-            .week-card { border-radius: 12px; }
+            .week-card { border-radius: 14px; margin-bottom: 0.25rem; }
             .week-header { 
-                padding: 1rem; 
+                padding: 1.2rem; 
                 flex-direction: row; 
                 align-items: center; 
-                gap: 0.75rem;
-                min-height: 56px; /* touch-friendly height */
+                gap: 1rem;
+                min-height: 60px; /* larger touch target */
             }
-            .week-title { gap: 0.75rem; flex: 1; }
-            .week-badge { padding: 0.3rem 0.7rem; font-size: 0.75rem; }
-            .week-name { font-size: 0.95rem; line-height: 1.3; }
+            .week-title { 
+                gap: 0.75rem; 
+                flex: 1; 
+                display: flex; 
+                flex-direction: column; 
+                align-items: flex-start; /* Stack badge and title on mobile */
+            }
+            .week-badge { padding: 0.35rem 0.8rem; font-size: 0.75rem; }
+            .week-name { font-size: 1.05rem; line-height: 1.4; }
             .week-toggle { 
-                width: 32px; 
-                height: 32px; 
+                width: 36px; 
+                height: 36px; 
                 flex-shrink: 0;
             }
             
-            .week-card.active .week-content { padding: 1rem; }
-            .split-box { padding: 0.9rem; border-radius: 10px; }
-            .mini-code { font-size: 0.75rem; padding: 0.6rem; border-radius: 6px; }
+            .week-card.active .week-content { padding: 1.2rem 1rem; }
+            .split-box { padding: 1rem; border-radius: 12px; }
+            .mini-code { font-size: 0.8rem; padding: 0.8rem; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; font-family: monospace; }
+            .mini-code code { white-space: pre-wrap; word-break: break-all; }
 
             /* Tags */
-            .tag { font-size: 0.7rem; padding: 3px 8px; }
+            .tag { font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; }
 
             /* Stat card value */
-            .stat-card .value { font-size: 2rem; }
+            .stat-card .value { font-size: 2.2rem; margin-bottom: 0.25rem;}
+            .stat-card .label { font-size: 0.85rem; }
+            
+            /* CTA Button Wrap */
+            .cta-button { font-size: 1rem !important; padding: 0.9rem 1.5rem !important; width: 100%; text-align: center; }
         }
 
         @media (max-width: 480px) {
-            h1 { font-size: 1.4rem; }
-            .hero-banner { height: 160px; border-radius: 12px; }
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.25rem; }
+            
+            .hero-banner { min-height: 200px; }
             .hero-overlay h1 { font-size: 1.5rem !important; }
-            .hero-overlay { padding: 1rem; }
+            .hero-overlay .subtitle { font-size: 0.75rem !important; }
 
-            .main-content { padding: 0.75rem 0.75rem 5rem 0.75rem; }
-            .glass-card { padding: 1rem; border-radius: 12px; }
-            .section-header h2 { font-size: 1.1rem; }
-            .section-icon { width: 34px; height: 34px; font-size: 1rem; }
+            .main-content { padding: 0.75rem 0.75rem 6.5rem 0.75rem; }
+            .glass-card { padding: 1.25rem; border-radius: 14px; }
+            .section-header h2 { font-size: 1.15rem; }
+            .section-icon { width: 36px; height: 36px; font-size: 1.1rem; }
 
             /* Header meta stacks fully */
-            .header-meta { grid-template-columns: 1fr; }
+            .header-meta { grid-template-columns: 1fr; gap: 0.6rem;}
 
             /* Stat card */
-            .stat-card .value { font-size: 1.8rem; }
+            .stat-card .value { font-size: 2rem; }
             .stat-card .label { font-size: 0.8rem; }
+            
+            .week-header { padding: 1rem; min-height: 56px;}
+            .week-name { font-size: 0.95rem; }
         }
 
         /* Sidebar close button - hidden on desktop */
@@ -861,11 +884,36 @@
             animation: fadeInDown 0.6s ease-out forwards;
             opacity: 0;
         }
+
+        .editable-highlight {
+            outline: 1px dashed var(--primary) !important;
+            outline-offset: 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .editable-highlight:focus {
+            outline: 2px solid var(--secondary) !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+            cursor: text;
+        }
+        .editable-highlight:hover {
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        /* Edit tools print hiding */
+        @media print {
+            .editable-highlight { outline: none !important; background: none !important; }
+            #mobileEditToggle, .discard-btn { display: none !important; }
+        }
     </style>
 </head>
 <body>
 
     <button class="mobile-menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+    <button id="mobileEditToggle" onclick="toggleEditMode()" style="position: fixed; bottom: 80px; right: 20px; z-index: 1000; background: var(--primary); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.4); font-size: 1.2rem; cursor: pointer; display: none; align-items: center; justify-content: center;">
+        <i class="fas fa-edit"></i>
+    </button>
     <div class="sidebar-overlay" onclick="toggleMenu()"></div>
 
     <nav class="sidebar">
@@ -885,9 +933,15 @@
             <li><a href="#parents"><i class="fas fa-heart"></i> Note to Parents</a></li>
 
         </ul>
-        <div style="margin-top: auto;">
+        <div style="margin-top: auto; display: flex; flex-direction: column; gap: 10px;">
+            <button id="editModeToggle" onclick="toggleEditMode()" style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: rgba(139, 92, 246, 0.2); color: white; cursor: pointer; transition: 0.3s; font-weight: bold; border: 1px solid var(--primary);">
+                <i class="fas fa-edit"></i> Enable Edit Mode
+            </button>
             <button onclick="window.print()" style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: rgba(255,255,255,0.1); color: white; cursor: pointer; transition: 0.3s; font-weight: bold; border: 1px solid rgba(255,255,255,0.2);">
                 <i class="fas fa-file-pdf"></i> Export PDF
+            </button>
+            <button class="discard-btn" onclick="resetCustomContent()" style="width: 100%; padding: 8px; border-radius: 8px; border: none; background: transparent; color: var(--text-muted); cursor: pointer; transition: 0.3s; font-size: 0.8rem; text-decoration: underline;">
+                Discard Saved Changes
             </button>
         </div>
     </nav>
@@ -1054,6 +1108,31 @@
             </div>
         </section>
 
+        <!-- Educational Journey Pathways -->
+        <section id="pathways" class="fade-in" style="animation-delay: 0.25s;">
+            <div class="section-header">
+                <div class="section-icon"><i class="fas fa-route" style="color:white;"></i></div>
+                <h2>The Educational Journey</h2>
+            </div>
+            <div class="grid-2" style="margin-bottom: 3rem;">
+                <div class="glass-card editable" style="border: 2px solid var(--primary); position: relative;">
+                    <span class="editable" style="position: absolute; top: -12px; right: 20px; background: var(--primary); color: white; padding: 2px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: bold;">Current Course</span>
+                    <h3 class="editable" style="color: white; margin-bottom: 1rem;"><i class="fas fa-flag-checkered" style="color: var(--primary); margin-right: 10px;"></i>Level 1: IGCSE Foundations</h3>
+                    <p class="editable" style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">20 Weeks • Computational Thinking • Program Design</p>
+                    <p class="editable" style="font-size: 0.9rem; color: #cbd5e1; line-height: 1.5;">Students master the core fundamentals of the IGCSE curriculum, learning how to think computationally, build trace tables, and understand the logic of programming.</p>
+                </div>
+                <div class="glass-card editable" style="position: relative; overflow: hidden; border: 2px solid rgba(255,255,255,0.05);" onclick="document.getElementById('level-2-cta').scrollIntoView({behavior: 'smooth'});">
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(6,182,212,0.1)); z-index: 1;"></div>
+                    <div style="position: relative; z-index: 2; cursor: pointer;">
+                        <span class="editable" style="position: absolute; top: -12px; right: 20px; background: rgba(255,255,255,0.15); color: white; padding: 2px 10px; border-radius: 12px; font-size: 0.8rem;">Future Level</span>
+                        <h3 class="editable" style="color: white; margin-bottom: 1rem;"><i class="fas fa-rocket" style="color: var(--secondary); margin-right: 10px;"></i>Level 2: Advanced Engineering</h3>
+                        <p class="editable" style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">20 Weeks • Python & Flask • Live Hackathon</p>
+                        <p class="editable" style="font-size: 0.9rem; color: #cbd5e1; line-height: 1.5;">Students apply their IGCSE knowledge to build a real-world, database-driven web application and pitch it in a professional Hackathon startup environment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Phase Roadmap -->
         <section id="phases" class="fade-in" style="animation-delay: 0.3s;">
             <div class="section-header">
@@ -1095,19 +1174,70 @@
                 <h2>Detailed Weekly Curriculum</h2>
             </div>
             
-            <h3 style="color: var(--primary); margin-bottom: 1.5rem; margin-top: 2rem;">PHASE 1: Foundations (Weeks 1-6)</h3>
-            <div class="week-container" id="phase1-container">
-                <!-- JS will populate -->
+            <div id="level-1-curriculum">
+                <h3 style="color: var(--primary); margin-bottom: 1.5rem; margin-top: 2rem;">PHASE 1: Foundations (Weeks 1-6)</h3>
+                <div class="week-container" id="phase1-container">
+                    <!-- JS will populate -->
+                </div>
+
+                <h3 style="color: var(--secondary); margin-bottom: 1.5rem; margin-top: 3rem;">PHASE 2: Development (Weeks 7-14)</h3>
+                <div class="week-container" id="phase2-container">
+                    <!-- JS will populate -->
+                </div>
+
+                <h3 style="color: var(--accent); margin-bottom: 1.5rem; margin-top: 3rem;">PHASE 3: Hackathon (Weeks 15-20)</h3>
+                <div class="week-container" id="phase3-container">
+                    <!-- JS will populate -->
+                </div>
             </div>
 
-            <h3 style="color: var(--secondary); margin-bottom: 1.5rem; margin-top: 3rem;">PHASE 2: Development (Weeks 7-14)</h3>
-            <div class="week-container" id="phase2-container">
-                <!-- JS will populate -->
+            <div id="level-2-curriculum" style="display: none;">
+                <h3 style="color: var(--primary); margin-bottom: 1.5rem; margin-top: 2rem;">PHASE 1: Advanced IGCSE & Backend (Weeks 1-10)</h3>
+                <div class="week-container" id="l2-phase1-container">
+                    <!-- JS will populate -->
+                </div>
+
+                <h3 style="color: var(--accent); margin-bottom: 1.5rem; margin-top: 3rem;">PHASE 2: Hackathon Sprint (Weeks 11-20)</h3>
+                <div class="week-container" id="l2-phase2-container">
+                    <!-- JS will populate -->
+                </div>
             </div>
 
-            <h3 style="color: var(--accent); margin-bottom: 1.5rem; margin-top: 3rem;">PHASE 3: Hackathon (Weeks 15-20)</h3>
-            <div class="week-container" id="phase3-container">
-                <!-- JS will populate -->
+            <!-- Ready for Next Level CTA -->
+            <div id="level-2-cta" class="glass-card fade-in" style="margin-top: 4rem; border: 2px solid var(--primary); background: linear-gradient(145deg, rgba(30,41,59,0.9), rgba(15,23,42,0.9)); position: relative; overflow: hidden;">
+                <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: var(--primary); filter: blur(80px); opacity: 0.2;"></div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem;">
+                    <div style="flex: 1; min-width: 300px; position: relative; z-index: 2;">
+                        <h2 class="editable" style="color: white; margin-bottom: 1rem; font-size: 2rem; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-rocket" style="color: var(--primary);"></i> Ready for the Next Level?
+                        </h2>
+                        <h3 class="editable" style="color: var(--primary); margin-bottom: 1.5rem; font-weight: 500;">Level 2: Advanced Web Engineering & Hackathon Competition</h3>
+                        <p class="editable" style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem; font-size: 1.05rem;">
+                            Bridge the gap between a high school exam and the tech industry. In Level 2, students build a live, database-driven web application using <strong style="color: white;">Python and Flask</strong>—the exact same technologies used by companies like Netflix and Reddit.
+                        </p>
+                        <div class="grid-2" style="gap: 1.5rem; margin-bottom: 2.5rem;">
+                            <div class="editable" style="background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 8px; border-left: 3px solid var(--primary);">
+                                <h4 style="color: white; margin-bottom: 0.5rem;"><i class="fas fa-graduation-cap" style="color: var(--primary); margin-right: 8px;"></i>Academic Superiority</h4>
+                                <p style="color: #cbd5e1; font-size: 0.9rem;">Master the hardest IGCSE topics (Databases, File Handling, Testing) by applying them to a real web application.</p>
+                            </div>
+                            <div class="editable" style="background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 8px; border-left: 3px solid var(--secondary);">
+                                <h4 style="color: white; margin-bottom: 0.5rem;"><i class="fas fa-briefcase" style="color: var(--secondary); margin-right: 8px;"></i>University-Grade Portfolio</h4>
+                                <p style="color: #cbd5e1; font-size: 0.9rem;">Leave with a professional, portfolio-ready product they can showcase for future internships and university applications.</p>
+                            </div>
+                            <div class="editable" style="background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 8px; border-left: 3px solid var(--accent);">
+                                <h4 style="color: white; margin-bottom: 0.5rem;"><i class="fas fa-users" style="color: var(--accent); margin-right: 8px;"></i>Real Hackathon Experience</h4>
+                                <p style="color: #cbd5e1; font-size: 0.9rem;">Develop crucial soft skills: public speaking, team leadership, product design, and deadline management.</p>
+                            </div>
+                            <div class="editable" style="background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 8px; border-left: 3px solid #10b981;">
+                                <h4 style="color: white; margin-bottom: 0.5rem;"><i class="fab fa-python" style="color: #10b981; margin-right: 8px;"></i>Future-Proofing</h4>
+                                <p style="color: #cbd5e1; font-size: 0.9rem;">Learn Python in a professional setting. It's the #1 language for AI, Data Science, and modern Software Engineering.</p>
+                            </div>
+                        </div>
+                        <button id="toggle-level-btn" class="cta-button" onclick="toggleLevel2()" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); display: inline-block; text-decoration: none; padding: 1rem 2.5rem; border-radius: 8px; color: white; font-weight: bold; border: none; cursor: pointer; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);">
+                            View Level 2 Syllabus
+                        </button>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -1326,203 +1456,488 @@
                 },
                 outcome: "Students can trace program execution and identify basic errors. Phase 1 assessment: Algorithm quiz and mini-program demo."
             },
-            // Phase 2: Programming Development Skills (Weeks 7-14)
+            // Phase 2: Python & Flask Development Skills (Weeks 7-14)
             {
                 week: 7, phase: 2,
-                title: "Functions and Modular Programming",
+                title: "Introduction to Web Servers & Flask Routing",
                 lesson: {
-                    topics: ["Functions and modularity", "Reusable code blocks", "Parameters and return values"],
-                    code: "FUNCTION add(a, b)\n    RETURN a + b\nENDFUNCTION\n\nresult = add(5, 3)\nDISPLAY result"
+                    topics: ["Client-Server Architecture", "What is an API / Route?", "Flask application setup"],
+                    code: "from flask import Flask\napp = Flask(__name__)\n\n@app.route('/hello')\ndef home():\n    return 'Hello, Web Browser!'"
                 },
                 lab: {
-                    project: "Modular Calculator",
-                    skills: ["Writing functions", "Calling functions", "Code organization"],
-                    elements: "Separate functions for add, subtract, multiply, divide"
+                    project: "First Flask Server",
+                    skills: ["Running a local web server", "Defining routes", "Returning strings over HTTP"],
+                    elements: "Install Flask, Create app.py, Build home, about, and contact routes"
                 },
-                outcome: "Students understand modular programming and can write reusable functions."
+                outcome: "Students understand backend architecture and can boot up a live local web server."
             },
             {
                 week: 8, phase: 2,
-                title: "Arrays and Data Storage",
+                title: "Dynamic Views & HTML Templates (Jinja2)",
                 lesson: {
-                    topics: ["Arrays and lists", "Storing and retrieving data", "Iterating through arrays"],
-                    code: "names = [\"Alice\", \"Bob\", \"Charlie\"]\nFOR i = 0 TO LENGTH(names) - 1\n    DISPLAY names[i]\nNEXT i"
+                    topics: ["Separation of concerns", "Jinja2 templating engine", "Passing variables to templates"],
+                    code: "@app.route('/user/<name>')\ndef profile(name):\n    return render_template('profile.html', user=name)"
                 },
                 lab: {
-                    project: "Quiz Application (Start)",
-                    skills: ["Array manipulation", "Question storage", "Basic JS logic"],
-                    elements: "Question display, Multiple choice options, Score variable"
+                    project: "Dynamic Profile Page",
+                    skills: ["render_template", "Jinja {{ variables }}", "HTML integration"],
+                    elements: "Create templates folder, pass user data from Python to HTML"
                 },
-                outcome: "Students understand arrays and begin building a multi-question quiz application."
+                outcome: "Students can connect Python backend logic to frontend HTML templates dynamically."
             },
             {
                 week: 9, phase: 2,
-                title: "Problem Decomposition Techniques",
+                title: "Control Flow in Templates & Data Structures",
                 lesson: {
-                    topics: ["Breaking problems into sub-problems", "Designing modular systems", "Stepwise refinement"],
-                    code: "Quiz Components:\n1. Question display\n2. Answer options\n3. Score tracking\n4. Result display"
+                    topics: ["Python lists and dictionaries", "Jinja {% for %} loops", "Jinja {% if %} conditions"],
+                    code: "{% for task in tasks %}\n  <li>{{ task.name }} - {{ task.status }}</li>\n{% endfor %}"
                 },
                 lab: {
-                    project: "Quiz Application (Enhancement)",
-                    skills: ["Multi-part app design", "Advanced logic mapping"],
-                    elements: "Multiple questions, Score counter, Result message display"
+                    project: "Task List App",
+                    skills: ["Python Lists/Dicts", "Template loops", "Conditional rendering"],
+                    elements: "Pass a list of tasks to the template, render them dynamically"
                 },
-                outcome: "Students can decompose complex problems and enhance their quiz with full scoring logic."
+                outcome: "Students understand how to render dynamic lists and collections on the frontend."
             },
             {
                 week: 10, phase: 2,
-                title: "Advanced Algorithm Design",
+                title: "Handling Forms & HTTP POST Requests",
                 lesson: {
-                    topics: ["Designing algorithms before coding", "Writing clear pseudocode", "Efficiency considerations"],
-                    code: "IF op = \"add\" THEN\n  res = n1 + n2\nELSE IF op = \"subtract\" THEN\n  res = n1 - n2\nENDIF"
+                    topics: ["GET vs POST methods", "HTML Forms", "request.form in Flask"],
+                    code: "@app.route('/add', methods=['POST'])\ndef add_task():\n    task = request.form.get('task')\n    tasks.append(task)\n    return redirect('/')"
                 },
                 lab: {
-                    project: "Calculator Web Tool",
-                    skills: ["Functions across operations", "Algorithm-first approach"],
-                    elements: "Addition, Subtraction, Multiplication, Division via UI buttons"
+                    project: "Interactive Task Manager",
+                    skills: ["HTML Forms", "POST routes", "Redirects"],
+                    elements: "Add an input form, capture submit data in Python, update the list"
                 },
-                outcome: "Students can design algorithms before coding and build a functional calculator."
+                outcome: "Students can process user input securely and create interactive, state-changing web apps."
             },
             {
                 week: 11, phase: 2,
-                title: "Debugging Techniques and Best Practices",
+                title: "Debugging Python & Error Handling",
                 lesson: {
-                    topics: ["Syntax Errors", "Logic Errors", "Runtime Errors", "Systematic debugging"],
-                    code: "// Activity: Analyze and fix broken code examples.\n// Common errors:\n// 1. Missing semicolons\n// 2. Wrong variable names\n// 3. Infinite loops"
+                    topics: ["Reading Python Tracebacks", "Flask Debug Mode", "Try/Except blocks", "Common Flask Errors (404, 500)"],
+                    code: "try:\n    age = int(request.form['age'])\nexcept ValueError:\n    return 'Error: Age must be a number!'"
                 },
                 lab: {
-                    project: "Debug Previous Work",
-                    skills: ["Testing methodology", "Code refactoring", "QA practices"],
-                    elements: "Debug Calculator, Fix Quiz App issues, Add visual improvements"
+                    project: "Debug the Broken Server",
+                    skills: ["Traceback analysis", "Error catching", "Form validation"],
+                    elements: "Fix intentional bugs in a sample app (missing templates, bad routing, type errors)"
                 },
-                outcome: "Students can systematically identify, trace, and repair different types of code errors."
+                outcome: "Students can systematically trace backend errors and validate user input."
             },
             {
                 week: 12, phase: 2,
-                title: "Systematic Testing Programs",
+                title: "Systematic Testing & Edge Cases",
                 lesson: {
-                    topics: ["Test planning", "Edge case identification", "Normal, boundary, and erroneous data"],
-                    code: "// Test Plan:\n// Input: 50  -> Expected: PASS\n// Input: 49  -> Expected: FAIL\n// Input: -1  -> Expected: ERROR\n// Input: 100 -> Expected: PASS"
+                    topics: ["Test planning", "Normal, boundary, and erroneous data tests", "Testing UI vs Backend"],
+                    code: "# Test Plan for /login route:\n# Input: missing username -> Expected: Flash Error\n# Input: correct details  -> Expected: Redirect Home"
                 },
                 lab: {
-                    project: "Test & Improve Applications",
-                    skills: ["Writing test cases", "Edge case testing"],
-                    elements: "Test previous projects with boundary values and invalid inputs"
+                    project: "Application QA Sprint",
+                    skills: ["Writing test cases", "Edge case testing", "User testing"],
+                    elements: "Create a formal test plan for the Task Manager and execute it"
                 },
-                outcome: "Students understand systematic testing and can create test plans for their programs."
+                outcome: "Students understand systematic testing methodologies and can harden their applications."
             },
             {
                 week: 13, phase: 2,
-                title: "Data Representation (Binary and ASCII)",
+                title: "Data Persistence (JSON / TXT)",
                 lesson: {
-                    topics: ["Binary number system", "ASCII encoding", "Data storage concepts"],
-                    code: "Decimal 5  = Binary 101\nDecimal 8  = Binary 1000\nDecimal 13 = Binary 1101\n\nASCII 'A' = 65\nASCII 'a' = 97"
+                    topics: ["Reading and Writing files in Python", "JSON format", "Simple data storage"],
+                    code: "import json\nwith open('data.json', 'w') as f:\n    json.dump(tasks, f)"
                 },
                 lab: {
-                    project: "Binary/ASCII Converter Tool",
-                    skills: ["Number conversion logic", "String manipulation"],
-                    elements: "Decimal to Binary converter, Character to ASCII display"
+                    project: "Persistent Notebook App",
+                    skills: ["File handling", "JSON parsing", "Persistent state"],
+                    elements: "Save notes to a JSON file so they survive server restarts"
                 },
-                outcome: "Students understand low-level data representation and can build conversion tools."
+                outcome: "Students understand how data is stored on a server permanently."
             },
             {
                 week: 14, phase: 2,
-                title: "Mid-Term Programming Project",
+                title: "Mid-Term Flask Project Showcase",
                 lesson: {
-                    topics: ["Project planning review", "Code quality standards", "Presentation preparation"],
-                    code: ""
+                    topics: ["Project integration", "Code review standards", "Pitch preparation"],
+                    code: "# Bringing it all together:\n# Routing + Templates + Forms + Data Persistence"
                 },
                 lab: {
                     project: "Mid-Term Project Showcase",
-                    skills: ["Full project development", "Code review", "Presentation"],
-                    elements: "Complete project: Quiz App, Calculator, or Study Timer"
+                    skills: ["Full web app deployment", "Code review", "Presentation"],
+                    elements: "Complete and demonstrate the Persistent Notebook App"
                 },
-                outcome: "Students demonstrate competency through a complete functional project. Phase 2 assessment: Functional coding project submission."
+                outcome: "Students demonstrate competency in full-stack Python development. Phase 2 assessment."
             },
             // Phase 3: Innovation Hackathon Project (Weeks 15-20)
             {
                 week: 15, phase: 3,
-                title: "Problem Identification",
+                title: "Problem Identification & Flask Architecture",
                 lesson: {
-                    topics: ["Problem Analysis Framework", "Who? Why? How often? What exists?"],
-                    code: "// Project Ideas:\n// - Homework Planner\n// - Grade Calculator\n// - Task Management App"
+                    topics: ["Problem Analysis Framework", "Defining requirements", "Planning Flask routes"],
+                    code: "# Architectural Route Plan:\n# GET / -> Home Dashboard\n# POST /add_item -> Create Logic\n# GET /report -> Analytics View"
                 },
                 lab: {
-                    project: "Brainstorming Session",
-                    skills: ["Feasibility analysis", "Requirements gathering"],
-                    elements: "Team selects ONE main project to build from scratch"
+                    project: "Hackathon Brief & Structure",
+                    skills: ["Team brainstorming", "Route planning", "File structuring"],
+                    elements: "Select project idea, setup basic Flask directories (templates/, static/)"
                 },
-                outcome: "Team identifies a real-world problem and outlines their hackathon app solution."
+                outcome: "Team identifies a real-world problem and maps out their application backend skeleton."
             },
             {
                 week: 16, phase: 3,
-                title: "Solution Design & Feature Planning",
+                title: "UI Wireframing & Flask MVP",
                 lesson: {
-                    topics: ["Wireframing", "User stories", "Feature prioritization", "MVP definition"],
-                    code: ""
+                    topics: ["Wireframing tools", "Minimum Viable Product (MVP)", "Static files in Flask (CSS/Images)"],
+                    code: "<!-- Adding static CSS to Flask -->\n<link rel=\"stylesheet\" href=\"{{ url_for('static', filename='style.css') }}\">"
                 },
                 lab: {
-                    project: "Design Document & Wireframes",
-                    skills: ["UI/UX planning", "Feature mapping"],
-                    elements: "Paper wireframes, Feature list, User flow diagrams"
+                    project: "Design & Connect Templates",
+                    skills: ["UI/UX planning", "Static file routing", "Jinja base templates"],
+                    elements: "Create wireframes, setup base.html with CSS, connect core routes"
                 },
-                outcome: "Team has a clear design document and feature roadmap for their project."
+                outcome: "Team has a working skeleton with custom styling and functional page navigation."
             },
             {
                 week: 17, phase: 3,
-                title: "Prototype Development (Core Functionality)",
+                title: "Prototype Development (Core Logic)",
                 lesson: {
-                    topics: ["MVP development", "Iterative building", "Core-first approach"],
-                    code: ""
+                    topics: ["Building the engine", "Complex data handling", "Controller logic"],
+                    code: "@app.route('/dashboard')\ndef dashboard():\n    # Process complex logic here\n    stats = calculate_metrics(data)\n    return render_template('dash.html', stats=stats)"
                 },
                 lab: {
                     project: "Build Core Prototype",
-                    skills: ["Full-stack development", "Integration"],
-                    elements: "User interface, Core functions, Basic navigation"
+                    skills: ["Backend data processing", "Form handling", "Integration"],
+                    elements: "Implement the primary feature of the app (e.g., calculating grades, saving reports)"
                 },
-                outcome: "Functional prototype with core features assembled and working."
+                outcome: "Functional prototype where the core logic and backend properly communicate with the UI."
             },
             {
                 week: 18, phase: 3,
-                title: "Feature Expansion & UI Improvements",
+                title: "Feature Expansion & Polish",
                 lesson: {
-                    topics: ["UI/UX best practices", "User feedback integration", "Visual design principles"],
-                    code: ""
+                    topics: ["User Experience (UX) refinement", "Adding secondary features", "Code refactoring"],
+                    code: "# Refactoring: Moving helper functions to a separate file\nfrom utils import calculate_metrics"
                 },
                 lab: {
                     project: "Feature Enhancement Sprint",
-                    skills: ["Advanced CSS", "Feature expansion"],
-                    elements: "Add secondary features, Improve colors/fonts/layout, Enhance UX"
+                    skills: ["Refactoring", "CSS polish", "Feature expansion"],
+                    elements: "Add flash messages, improve UI styling, ensure code is modular and clean"
                 },
-                outcome: "Enhanced prototype with additional features and polished user interface."
+                outcome: "Enhanced prototype with secondary features, clean code, and polished user interface."
             },
             {
                 week: 19, phase: 3,
                 title: "Final Testing and Debugging",
                 lesson: {
-                    topics: ["System testing", "Cross-browser testing", "Final QA checklist"],
-                    code: ""
+                    topics: ["End-to-End System Testing", "Peer QAing", "Final Deployment Checklist"],
+                    code: "# Pre-flight checks:\n# 1. Debug mode OFF? (app.run(debug=False))\n# 2. All routes functioning without 500 errors?"
                 },
                 lab: {
-                    project: "Final QA & Polish",
-                    skills: ["Bug squashing", "Performance optimization"],
-                    elements: "Test edge cases, Fix remaining bugs, Final design polish"
+                    project: "Final QA & Optimization",
+                    skills: ["Bug squashing", "Edge case handling"],
+                    elements: "Test against boundary limits, fix all remaining tracebacks, optimize UI"
                 },
-                outcome: "A polished, fully tested app ready for formal presentation."
+                outcome: "A robust, fully tested Flask application ready for demonstration."
             },
             {
                 week: 20, phase: 3,
                 title: "Final Hackathon Presentation & Live Demo",
                 lesson: {
-                    topics: ["Professional Presentation", "Tech Demos", "Pitch structure"],
-                    code: "Presentation Roles:\n- Problem Expert\n- Tech Lead\n- QA Lead\n- Product Demo"
+                    topics: ["Professional Tech Demos", "Pitch structure", "Explaining Technical Architecture"],
+                    code: "Presentation Roles:\n- Problem Expert (Why)\n- Backend Lead (Python/Flask)\n- Frontend Lead (UI/Jinja)\n- QA/Demo Specialist"
                 },
                 lab: {
                     project: "FINAL HACKATHON",
-                    skills: ["Public speaking", "Live demos", "Pitching"],
-                    elements: "Final code polish, Prepare presentation, Live Presentations & Demo"
+                    skills: ["Public speaking", "Live technical demos", "Pitching"],
+                    elements: "Final code freeze, prepare slide deck, execute Live Presentation & Demo"
                 },
-                outcome: "Professional presentation and live demonstration of the finished hackathon project."
+                outcome: "Professional presentation and live demonstration of the final Flask hackathon project."
+            }
+        ];
+
+        const level2CurriculumData = [
+            // Phase 1: Advanced IGCSE & Backend (Weeks 1-10)
+            {
+                week: 1, phase: 1,
+                title: "Web Servers & HTTP Routing",
+                lesson: {
+                    topics: ["Functions and Subroutines applied to routing", "HTTP Methods", "Client-Server models"],
+                    code: "@app.route('/login', methods=['GET', 'POST'])\\ndef login():\\n    return render_template('login.html')"
+                },
+                lab: {
+                    project: "Dynamic URL Mapping",
+                    skills: ["Flask routing", "Python functions"],
+                    elements: "Create a web server with parameterized routes (e.g., /user/<username>)"
+                },
+                outcome: "Students learn how basic subroutines directly power website navigation."
+            },
+            {
+                week: 2, phase: 1,
+                title: "Frontend Integration (Jinja2 Templates)",
+                lesson: {
+                    topics: ["Separation of concerns", "Passing variables to views", "Dynamic HTML rendering"],
+                    code: "<h1>Hello, {{ user_name }}!</h1>\\n<p>Your score is {{ score }}</p>"
+                },
+                lab: {
+                    project: "Dynamic Profile Dashboard",
+                    skills: ["Jinja templating", "HTML/CSS integration"],
+                    elements: "Pass Python variables into a styled HTML template."
+                },
+                outcome: "Students can connect backend logic to frontend visual interfaces."
+            },
+            {
+                week: 3, phase: 1,
+                title: "Form Handling & Data Validation",
+                lesson: {
+                    topics: ["Length checks, Type checks, Presence checks", "Capturing POST data"],
+                    code: "username = request.form.get('user')\\nif len(username) < 5:\\n    flash('Username too short!')"
+                },
+                lab: {
+                    project: "Secure Registration Form",
+                    skills: ["Form submission", "Server-side validation"],
+                    elements: "Build an HTML form and validate all inputs in Python before accepting."
+                },
+                outcome: "Students understand how: to securely process user input."
+            },
+            {
+                week: 4, phase: 1,
+                title: "Arrays & Dynamic Data Display",
+                lesson: {
+                    topics: ["1D/2D Lists", "Iterating through arrays", "Jinja for-loops"],
+                    code: "{% for student in class_list %}\\n  <li>{{ student }}</li>\\n{% endfor %}"
+                },
+                lab: {
+                    project: "Student Roster Table",
+                    skills: ["Array manipulation", "Dynamic table rendering"],
+                    elements: "Pass a Python list of data into an HTML table using loops."
+                },
+                outcome: "Students can dynamically render lists of data to the web interface."
+            },
+            {
+                week: 5, phase: 1,
+                title: "File Handling in Python",
+                lesson: {
+                    topics: ["Opening, Reading, and Writing to files", "Text and CSV formats"],
+                    code: "with open('logs.txt', 'a') as file:\\n    file.write(f'User {name} logged in\\n')"
+                },
+                lab: {
+                    project: "Server Log System",
+                    skills: ["File handling", "Persistent storage"],
+                    elements: "Save every form submission locally to a text or CSV file."
+                },
+                outcome: "Students learn how data outlives a program execution via files."
+            },
+            {
+                week: 6, phase: 1,
+                title: "IGCSE Database Theory",
+                lesson: {
+                    topics: ["Fields, Records, Primary Keys", "Flat-file vs Relational DBs"],
+                    code: "Table: Students\\nPrimary Key: StudentID\\nFields: Name, Grade, Email"
+                },
+                lab: {
+                    project: "Database Schema Design",
+                    skills: ["Data modeling", "Entity-relationship mapping"],
+                    elements: "Design a paper-based schema for their upcoming Hackathon idea."
+                },
+                outcome: "Students understand the formal structure of relational databases."
+            },
+            {
+                week: 7, phase: 1,
+                title: "Integrating SQLite Databases",
+                lesson: {
+                    topics: ["SQL Queries (SELECT, INSERT)", "Executing SQL from Python"],
+                    code: "cursor.execute('INSERT INTO users (name) VALUES (?)', (name,))\\nconn.commit()"
+                },
+                lab: {
+                    project: "SQL Address Book",
+                    skills: ["Database integration", "SQL Execution"],
+                    elements: "Replace week 5's text files with a real SQLite relational database."
+                },
+                outcome: "Students can connect a web application to a live database engine."
+            },
+            {
+                week: 8, phase: 1,
+                title: "Logic Gates & Security Patterns",
+                lesson: {
+                    topics: ["AND/OR/NOT logic", "Authentication principles", "Session management"],
+                    code: "IF username == input_user AND password == input_pass THEN\\n    GRANT ACCESS"
+                },
+                lab: {
+                    project: "Secure Login Portal",
+                    skills: ["Boolean logic gating", "Flask sessions"],
+                    elements: "Build a login system that only allows access if credentials match the database."
+                },
+                outcome: "Students apply foundational logic to build real-world security systems."
+            },
+            {
+                week: 9, phase: 1,
+                title: "Systematic QA & Test Plans",
+                lesson: {
+                    topics: ["Normal, Boundary, and Erroneous Test Data", "Trace tables for logic flaws"],
+                    code: "// Test Plan: Password Field\\n// Normal: 'Secure123'\\n// Extreme/Boundary: 'A' (1 char)\\n// Erroneous: NULL (Empty)"
+                },
+                lab: {
+                    project: "Red Team Testing",
+                    skills: ["QA Testing", "Security auditing"],
+                    elements: "Students formally test their partner's login portals with extreme data to find bugs."
+                },
+                outcome: "Students learn professional Quality Assurance and how to break code."
+            },
+            {
+                week: 10, phase: 1,
+                title: "Mid-Term Milestone: Full Stack App",
+                lesson: {
+                    topics: ["System integration", "Decomposition of complex problems"],
+                    code: "# Review: Combining Routing + DB + Logic + Testing"
+                },
+                lab: {
+                    project: "Mid-Term Project Deadline",
+                    skills: ["Full stack execution", "Deployment"],
+                    elements: "Finish and present a working web app (e.g., Noticeboard or Tracker)."
+                },
+                outcome: "Students demonstrate competency in all IGCSE technical requirements."
+            },
+            // Phase 2: Hackathon Sprint (Weeks 11-20)
+            {
+                week: 11, phase: 2,
+                title: "Problem Abstraction & System Design",
+                lesson: {
+                    topics: ["Target audience analysis", "Feature prioritization", "System flowcharts"],
+                    code: ""
+                },
+                lab: {
+                    project: "Hackathon Blueprint",
+                    skills: ["Systems design", "Project management"],
+                    elements: "Teams lock in their hackathon idea and write a technical specification document."
+                },
+                outcome: "Teams act like a startup, defining exactly what they will build and why."
+            },
+            {
+                week: 12, phase: 2,
+                title: "UI Wireframing & DB Schema Mapping",
+                lesson: {
+                    topics: ["User Experience (UX) flow", "Database normalization"],
+                    code: ""
+                },
+                lab: {
+                    project: "Architecture Day",
+                    skills: ["Figma/Wireframing", "SQL schema creation"],
+                    elements: "Draw every screen and write the SQL CREATE TABLE commands needed."
+                },
+                outcome: "Teams finalize the blueprint before writing functional code."
+            },
+            {
+                week: 13, phase: 2,
+                title: "Core Engine Development",
+                lesson: {
+                    topics: ["MVP Development", "Writing algorithms for core features"],
+                    code: ""
+                },
+                lab: {
+                    project: "Backend Sprint 1",
+                    skills: ["Python logic", "Database CRUD operations"],
+                    elements: "Build the most important, technically difficult feature of the app first."
+                },
+                outcome: "The primary 'engine' of the hackathon project is functional."
+            },
+            {
+                week: 14, phase: 2,
+                title: "Frontend Polish & UI Rendering",
+                lesson: {
+                    topics: ["CSS Grid/Flexbox", "Enhancing Jinja templates"],
+                    code: ""
+                },
+                lab: {
+                    project: "Frontend Sprint",
+                    skills: ["HTML/CSS", "Design implementation"],
+                    elements: "Connect the core engine to nicely styled HTML interfaces."
+                },
+                outcome: "The application looks and feels like a real product."
+            },
+            {
+                week: 15, phase: 2,
+                title: "Iterative Feature Expansion",
+                lesson: {
+                    topics: ["Agile Development", "Adding secondary features"],
+                    code: ""
+                },
+                lab: {
+                    project: "Development Sprint 2",
+                    skills: ["Code refactoring", "Feature expansion"],
+                    elements: "Add settings pages, profiles, or secondary functionality."
+                },
+                outcome: "The product grows beyond just a Minimum Viable Product."
+            },
+            {
+                week: 16, phase: 2,
+                title: "Integrating Complex Logic",
+                lesson: {
+                    topics: ["Advanced Algorithms", "Sorting and Searching data"],
+                    code: ""
+                },
+                lab: {
+                    project: "Algorithm Sprint",
+                    skills: ["Sorting algorithms", "Search filters"],
+                    elements: "Implement search bars or data sorting features in the app."
+                },
+                outcome: "Students apply complex IGCSE algorithms to real user data."
+            },
+            {
+                week: 17, phase: 2,
+                title: "Traceback Debugging & Logic Fixing",
+                lesson: {
+                    topics: ["Reading Flask tracebacks", "Fixing 500 Server Errors", "Trace Tables"],
+                    code: ""
+                },
+                lab: {
+                    project: "Bug Squash Day",
+                    skills: ["Debugging", "Code review"],
+                    elements: "Run the app, intentionally find errors, and use logic to trace the bugs."
+                },
+                outcome: "Teams learn how to stabilize broken software."
+            },
+            {
+                week: 18, phase: 2,
+                title: "Final QA & Test Plan Execution",
+                lesson: {
+                    topics: ["End-to-End Testing", "Peer Review"],
+                    code: ""
+                },
+                lab: {
+                    project: "System Testing",
+                    skills: ["Quality Assurance"],
+                    elements: "Execute formal Test Plans containing extreme and erroneous data."
+                },
+                outcome: "The application is hardened against crashes and bad input."
+            },
+            {
+                week: 19, phase: 2,
+                title: "Code Freeze & Pitch Preparation",
+                lesson: {
+                    topics: ["Product pitching", "Explaining technical architecture"],
+                    code: "Pitch Structure:\\n1. The Problem\\n2. The Demo\\n3. The Tech Stack\\n4. Lessons Learned"
+                },
+                lab: {
+                    project: "Presentation Deck",
+                    skills: ["Public Speaking", "Technical communication"],
+                    elements: "Stop coding. Build the slide deck and rehearse the live demo."
+                },
+                outcome: "Teams are prepared for professional public speaking."
+            },
+            {
+                week: 20, phase: 2,
+                title: "The Final Hackathon Competition",
+                lesson: {
+                    topics: ["Live Demonstrations"],
+                    code: ""
+                },
+                lab: {
+                    project: "Main Event!",
+                    skills: ["Presenting", "Live Q&A"],
+                    elements: "Present the project to judges and demonstrate the live working web application."
+                },
+                outcome: "Students graduate with a professional portfolio piece and presentation experience."
             }
         ];
 
@@ -1538,33 +1953,40 @@
                         <div class="week-toggle"><i class="fas fa-chevron-down"></i></div>
                     </div>
                     <div class="week-content">
-                        <div class="week-grid">
-                            <div class="split-box">
-                                <h4><i class="fas fa-chalkboard-teacher"></i> IGCSE Lesson (45 min)</h4>
-                                <ul>
-                                    ${data.lesson.topics.map(t => `<li>${t}</li>`).join('')}
-                                </ul>
-                                ${codeBlock}
-                            </div>
-                            <div class="split-box" style="background: rgba(6, 182, 212, 0.05); border-color: rgba(6, 182, 212, 0.1);">
-                                <h4 style="color: var(--secondary);"><i class="fas fa-laptop-code"></i> Hackathon Lab (45 min)</h4>
-                                <div style="margin-bottom:1rem;">
-                                    <strong>Project:</strong> <span style="color:white;">${data.lab.project}</span>
-                                </div>
-                                <div style="margin-bottom:1rem;">
-                                    <strong>Skills/Tasks:</strong>
-                                    <div style="margin-top:8px;">
-                                        ${data.lab.skills.map(s => `<span class="tag blue">${s}</span>`).join('')}
-                                    </div>
-                                </div>
+                        <div class="split-box" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(6, 182, 212, 0.05)); border: 1px solid rgba(255, 255, 255, 0.08);">
+                            <h4 style="color: white; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.8rem; margin-bottom: 1.5rem;">
+                                <i class="fas fa-layer-group" style="color: var(--primary);"></i> Integrated Session (90 min)
+                            </h4>
+                            
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
                                 <div>
-                                    <strong>Focus/Elements:</strong>
-                                    <p style="color:var(--text-muted); font-size:0.9rem; margin-top:5px;">${data.lab.elements}</p>
+                                    <h5 style="color: var(--text-main); margin-bottom: 1rem; font-size: 0.95rem; font-family: 'Outfit', sans-serif;"><i class="fas fa-book-reader" style="color: var(--primary);"></i> Theory & Logic</h5>
+                                    <ul>
+                                        ${data.lesson.topics.map(t => `<li>${t}</li>`).join('')}
+                                    </ul>
+                                    ${codeBlock}
+                                </div>
+                                
+                                <div>
+                                    <h5 style="color: var(--text-main); margin-bottom: 1rem; font-size: 0.95rem; font-family: 'Outfit', sans-serif;"><i class="fas fa-laptop-code" style="color: var(--secondary);"></i> Practical Application</h5>
+                                    <div style="margin-bottom:1rem;">
+                                        <strong>Project:</strong> <span style="color:white;">${data.lab.project}</span>
+                                    </div>
+                                    <div style="margin-bottom:1rem;">
+                                        <strong>Skills Applied:</strong>
+                                        <div style="margin-top:8px;">
+                                            ${data.lab.skills.map(s => `<span class="tag blue">${s}</span>`).join('')}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <strong>Deliverables:</strong>
+                                        <p style="color:var(--text-muted); font-size:0.9rem; margin-top:5px;">${data.lab.elements}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(139, 92, 246, 0.1); border-radius: 8px; border-left: 4px solid var(--primary);">
-                            <strong style="color: white;">Outcome:</strong>
+                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px; border-left: 4px solid #10b981;">
+                            <strong style="color: white;"><i class="fas fa-check-circle"></i> Session Outcome:</strong>
                             <p style="color: #cbd5e1; margin-top: 5px; font-size: 0.95rem;">${data.outcome}</p>
                         </div>
                     </div>
@@ -1576,6 +1998,33 @@
         document.getElementById('phase1-container').innerHTML = curriculumData.filter(d => d.phase === 1).map(createWeekHTML).join('');
         document.getElementById('phase2-container').innerHTML = curriculumData.filter(d => d.phase === 2).map(createWeekHTML).join('');
         document.getElementById('phase3-container').innerHTML = curriculumData.filter(d => d.phase === 3).map(createWeekHTML).join('');
+        
+        document.getElementById('l2-phase1-container').innerHTML = level2CurriculumData.filter(d => d.phase === 1).map(createWeekHTML).join('');
+        document.getElementById('l2-phase2-container').innerHTML = level2CurriculumData.filter(d => d.phase === 2).map(createWeekHTML).join('');
+
+        function toggleLevel2() {
+            const level1 = document.getElementById('level-1-curriculum');
+            const level2 = document.getElementById('level-2-curriculum');
+            const ctaBtn = document.getElementById('toggle-level-btn');
+            const sectionHeader = document.querySelector('#curriculum .section-header h2');
+
+            if (level2.style.display === 'none') {
+                level1.style.display = 'none';
+                level2.style.display = 'block';
+                ctaBtn.innerHTML = '<i class="fas fa-arrow-left"></i> Back to Level 1 Syllabus';
+                sectionHeader.innerHTML = 'Level 2 Curriculum (Advanced)';
+                document.getElementById('curriculum').scrollIntoView({behavior: 'smooth', block: 'start'});
+            } else {
+                level2.style.display = 'none';
+                level1.style.display = 'block';
+                ctaBtn.innerHTML = 'View Level 2 Syllabus <i class="fas fa-arrow-right" style="margin-left: 5px;"></i>';
+                sectionHeader.innerHTML = 'Detailed Weekly Curriculum';
+                document.getElementById('curriculum').scrollIntoView({behavior: 'smooth', block: 'start'});
+            }
+        }
+
+        // Load custom content from localStorage if any
+        loadCustomContent();
 
         // Expand/Collapse logic
         function toggleWeek(el) {
@@ -1658,6 +2107,146 @@
                 }
             });
         });
+
+        // Edit Mode Logic
+        let isEditMode = false;
+
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            const toggleBtn = document.getElementById('editModeToggle');
+            const mobileBtn = document.getElementById('mobileEditToggle');
+            
+            // Define which elements can be edited
+            const editableElements = document.querySelectorAll(
+                'header h1, header h2, header h3, header h4, header .subtitle, header .meta-item, ' +
+                'section h2, section h3, section h4, section p, ' +
+                '.stat-card .value, .stat-card .label, ' +
+                'td, th, li, .week-badge, .week-name, .mini-code, .phase-number, ' +
+                '.hero-overlay span, .hero-overlay h1'
+            );
+
+            if (isEditMode) {
+                // Turn on Editor
+                toggleBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+                toggleBtn.style.background = 'rgba(16, 185, 129, 0.2)';
+                toggleBtn.style.borderColor = '#10b981';
+                
+                if(mobileBtn) {
+                    mobileBtn.innerHTML = '<i class="fas fa-save"></i>';
+                    mobileBtn.style.background = '#10b981';
+                }
+
+                editableElements.forEach(el => {
+                    el.contentEditable = "true";
+                    el.classList.add('editable-highlight');
+                });
+                
+                showNotification('Edit mode enabled. Click on any highlighted text to edit.');
+            } else {
+                // Turn off Editor & Save
+                toggleBtn.innerHTML = '<i class="fas fa-edit"></i> Enable Edit Mode';
+                toggleBtn.style.background = 'rgba(139, 92, 246, 0.2)';
+                toggleBtn.style.borderColor = 'var(--primary)';
+                
+                if(mobileBtn) {
+                    mobileBtn.innerHTML = '<i class="fas fa-edit"></i>';
+                    mobileBtn.style.background = 'var(--primary)';
+                }
+
+                editableElements.forEach(el => {
+                    el.contentEditable = "false";
+                    el.classList.remove('editable-highlight');
+                });
+
+                saveCustomContent();
+                showNotification('Changes saved locally.');
+            }
+        }
+
+        // Save modifications to Local Storage
+        function saveCustomContent() {
+            const editableAreas = [
+                'header', '#overview', '#objectives', '#roles', '#phases', '#portfolio', '#resources', '#parents', 
+                '#phase1-container', '#phase2-container', '#phase3-container', 
+                '#l2-phase1-container', '#l2-phase2-container'
+            ];
+            
+            const savedData = {};
+            editableAreas.forEach(selector => {
+                const el = document.querySelector(selector);
+                if (el) {
+                    // Temporarily remove highlighting classes before saving innerHTML
+                    const highlights = el.querySelectorAll('.editable-highlight');
+                    const wasEditable = Array.from(highlights).map(h => {
+                        const state = h.contentEditable;
+                        h.contentEditable = "false";
+                        h.classList.remove('editable-highlight');
+                        return { el: h, state: state };
+                    });
+                    
+                    savedData[selector] = el.innerHTML;
+                    
+                    // Put classes back immediately
+                    wasEditable.forEach(item => {
+                        item.el.classList.add('editable-highlight');
+                        item.el.contentEditable = item.state;
+                    });
+                }
+            });
+            localStorage.setItem('dashboardCustomContent', JSON.stringify(savedData));
+        }
+
+        // Load modifications from Local Storage
+        function loadCustomContent() {
+            const savedDataStr = localStorage.getItem('dashboardCustomContent');
+            if (savedDataStr) {
+                try {
+                    const savedData = JSON.parse(savedDataStr);
+                    for (const [selector, html] of Object.entries(savedData)) {
+                        const el = document.querySelector(selector);
+                        if (el && html) {
+                            el.innerHTML = html;
+                        }
+                    }
+                } catch(e) {
+                    console.error('Error loading custom content', e);
+                }
+            }
+        }
+
+        // Reset to original Content
+        function resetCustomContent() {
+            if(confirm("Are you sure you want to discard your saved custom edits and restore the original template?")) {
+                localStorage.removeItem('dashboardCustomContent');
+                location.reload();
+            }
+        }
+
+        // Elegant Toast Notification
+        function showNotification(msg) {
+            const toast = document.createElement('div');
+            toast.style.position = 'fixed';
+            toast.style.bottom = '20px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.background = 'rgba(16, 185, 129, 0.95)';
+            toast.style.color = 'white';
+            toast.style.padding = '12px 24px';
+            toast.style.borderRadius = '30px';
+            toast.style.zIndex = '9999';
+            toast.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+            toast.style.fontWeight = 'bold';
+            toast.style.letterSpacing = '0.5px';
+            toast.innerText = msg;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                toast.style.transform = 'translate(-50%, 20px)';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
     </script>
 </body>
 </html>
